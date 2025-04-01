@@ -1,0 +1,13 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compileOnSave": false,
+  "files": [],
+  "references": [
+    {
+      "path": "./apps/labstat-e2e"
+    },
+    {
+      "path": "./apps/labstat"
+    }
+  ]
+}
