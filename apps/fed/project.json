@@ -1,0 +1,45 @@
+{
+	"$schema": "../../node_modules/nx/schemas/project-schema.json",
+	"name": "fed",
+	"sourceRoot": "apps/fed/src",
+	"targets": {
+		"build": {
+			"executor": "@nx/rspack:rspack",
+			"outputs": ["{options.outputPath}"],
+			"defaultConfiguration": "prod",
+			"options": {
+				"outputPath": "dist/fed",
+				"main": "apps/fed/src/main.ts",
+				"tsConfig": "apps/fed/tsconfig.app.json",
+				"rspackConfig": "apps/fed/rspack.config.js"
+			},
+			"configurations": {
+				"dev": { },
+				"prod": {
+					"mode": "production",
+					"sourcemap": false,
+					"optimization": true
+				}
+			}
+		},
+		"serve": {
+			"executor": "@nx/js:node",
+			"defaultConfiguration": "dev",
+			"options": {
+				"buildTarget": "fed:build:dev",
+				"runBuildTargetDependencies": false,
+				"inspect": false
+			},
+			"configurations": {
+				"dev": { },
+				"prod": {
+					"buildTarget": "fed:build:prod"
+				}
+			}
+		},
+		"lint": {
+			"executor": "@nx/eslint:lint",
+			"outputs": ["{options.outputFile}"]
+		}
+	}
+}

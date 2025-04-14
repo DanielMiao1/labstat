@@ -1,0 +1,45 @@
+{
+	"$schema": "../../node_modules/nx/schemas/project-schema.json",
+	"name": "api",
+	"sourceRoot": "apps/api/src",
+	"targets": {
+		"build": {
+			"executor": "@nx/rspack:rspack",
+			"outputs": ["{options.outputPath}"],
+			"defaultConfiguration": "prod",
+			"options": {
+				"outputPath": "dist/api",
+				"main": "apps/api/src/main.ts",
+				"tsConfig": "apps/api/tsconfig.app.json",
+				"rspackConfig": "apps/api/rspack.config.js"
+			},
+			"configurations": {
+				"dev": { },
+				"prod": {
+					"mode": "production",
+					"sourcemap": false,
+					"optimization": true
+				}
+			}
+		},
+		"serve": {
+			"executor": "@nx/js:node",
+			"defaultConfiguration": "dev",
+			"options": {
+				"buildTarget": "api:build:dev",
+				"runBuildTargetDependencies": false,
+				"inspect": false
+			},
+			"configurations": {
+				"dev": { },
+				"prod": {
+					"buildTarget": "api:build:prod"
+				}
+			}
+		},
+		"lint": {
+			"executor": "@nx/eslint:lint",
+			"outputs": ["{options.outputFile}"]
+		}
+	}
+}
