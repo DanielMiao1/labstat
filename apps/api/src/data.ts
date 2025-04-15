@@ -21,6 +21,8 @@ function getData(id: string): number {
 	if (collector) {
 		return collector.getData();
 	}
+
+	return 0;
 }
 
 export {activeCollectors, getData};

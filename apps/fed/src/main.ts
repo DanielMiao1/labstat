@@ -1,11 +1,35 @@
 import Fastify from "fastify";
 import fastifyStatic from "@fastify/static";
+import fastifyWebsocket from "@fastify/websocket";
+import WebSocket from "ws";
 import { join } from "path";
 
 import { getNodes, initDataFile, writeNode } from "./nodes";
 
 const server = Fastify();
 initDataFile();
+
+server.register(fastifyWebsocket);
+server.register(async ws_server => {
+	ws_server.get(
+		"/api/:node/data",
+		{ websocket: true },
+		(socket, request) => {
+			const { node } = request.params;
+			const host = `ws://${node}:17220/api/data`;
+
+			const node_socket = new WebSocket(host);
+
+			node_socket.addEventListener("message", message => {
+				socket.send(message.data);
+			});
+
+			socket.on("message", message => {
+				node_socket.send(message);
+			})
+		}
+	);
+})
 
 server.register(fastifyStatic, {
 	prefix: "/",
@@ -34,6 +58,17 @@ server.post("/api/register-node", {
 
 	writeNode(ip, request.body);
 	reply.send("");
+});
+
+server.get("/api/:node/collectors", async (request, reply) => {
+	const { node } = request.params;
+	const url = `http://${node}:17220/api/collectors`;
+	console.log(url)
+
+	const request = await fetch(url);
+	const collectors = await request.json();
+
+	reply.send(collectors);
 });
 
 server.listen({
