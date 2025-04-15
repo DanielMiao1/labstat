@@ -1,6 +1,7 @@
 import getHash from "../util/hash";
 
 let socket: WebSocket;
+const collectors: string[] = [];
 
 async function getCollectors(node: string): Promise<string[]> {
 	const url = `/api/${node}/collectors`;
@@ -53,16 +54,28 @@ async function initializeSocket(node: string) {
 	});
 }
 
+function refreshData(ids?) {
+	(ids ?? collectors).forEach(id => {
+		socket.send(id);
+	});
+}
+
 async function nodeView(content: HTMLElement) {
 	const node = getHash();
-	const collectors = await getCollectors(node);
+	const all_collectors = await getCollectors(node);
 
 	await initializeSocket(node);
 	
-	collectors.forEach(id => {
+	all_collectors.forEach(id => {
 		showCollector(content, node, id);
-		socket.send(id);
+		if (!id.startsWith("!")) {
+			collectors.push(id);
+		}
 	});
+
+	refreshData(all_collectors);
+
+	setInterval(refreshData, 1000);
 }
 
 export default nodeView;

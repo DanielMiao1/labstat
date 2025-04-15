@@ -1,6 +1,9 @@
-import { TestData } from "./collectors/core";
+import { FreeMem, Network, TotalMem, Uptime } from "./collectors/core";
 
-const all_collectors = [TestData];
+const all_collectors = [
+  FreeMem, Network, TotalMem, Uptime
+];
+
 const active_collectors = {};
 
 all_collectors.forEach(collector => {
@@ -25,4 +28,4 @@ function getData(id: string): number {
 	return 0;
 }
 
-export {activeCollectors, getData};
+export { activeCollectors, getData };

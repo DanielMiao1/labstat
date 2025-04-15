@@ -11,24 +11,24 @@ initDataFile();
 
 server.register(fastifyWebsocket);
 server.register(async ws_server => {
-	ws_server.get(
-		"/api/:node/data",
-		{ websocket: true },
-		(socket, request) => {
-			const { node } = request.params;
-			const host = `ws://${node}:17220/api/data`;
+	ws_server.get("/api/:node/data", { websocket: true }, (socket, request) => {
+		const { node } = request.params;
+		const host = `ws://${node}:17220/api/data`;
 
-			const node_socket = new WebSocket(host);
+		const node_socket = new WebSocket(host);
+		const node_ready = new Promise(resolve => {
+			node_socket.addEventListener("open", resolve);
+		});
+		
+		node_socket.addEventListener("message", message => {
+			socket.send(message.data);
+		});
 
-			node_socket.addEventListener("message", message => {
-				socket.send(message.data);
-			});
-
-			socket.on("message", message => {
-				node_socket.send(message);
-			})
-		}
-	);
+		socket.on("message", async message => {
+			await node_ready;
+			node_socket.send(message);
+		});	
+	});
 })
 
 server.register(fastifyStatic, {
@@ -63,7 +63,6 @@ server.post("/api/register-node", {
 server.get("/api/:node/collectors", async (request, reply) => {
 	const { node } = request.params;
 	const url = `http://${node}:17220/api/collectors`;
-	console.log(url)
 
 	const request = await fetch(url);
 	const collectors = await request.json();
