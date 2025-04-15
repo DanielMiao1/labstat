@@ -1,4 +1,5 @@
-# See https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
+# runtime data
+/data
 
 # compiled output
 dist
@@ -38,5 +39,6 @@ testem.log
 .DS_Store
 Thumbs.db
 
+# NX cache
 .nx/cache
 .nx/workspace-data

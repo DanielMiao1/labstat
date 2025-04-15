@@ -1,7 +1,11 @@
-async function getNodes() {
-  const request = await fetch("/api/nodes");
-
-  return await request.text();
+interface NodeOptions {
+  hostname: string;
 }
 
-export { getNodes };
+async function getNodes(): Promise<NodeOptions> {
+	const request = await fetch("/api/nodes");
+
+	return await request.json();
+}
+
+export { getNodes, type NodeOptions };
