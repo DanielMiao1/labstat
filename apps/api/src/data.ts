@@ -15,18 +15,12 @@ function activeCollectors() {
 	return Object.keys(active_collectors);
 }
 
-function aggregate(ids: string[]) {
-	const data = {};
+function getData(id: string): number {
+	const collector = active_collectors[id];
 
-	ids.forEach(id => {
-		const collector = active_collectors[id];
-
-		if (collector) {
-			data[id] = collector.getData();
-		}
-	});
-	
-	return data;
+	if (collector) {
+		return collector.getData();
+	}
 }
 
-export {activeCollectors, aggregate};
+export {activeCollectors, getData};

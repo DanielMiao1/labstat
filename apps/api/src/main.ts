@@ -1,27 +1,26 @@
 import Fastify from "fastify";
+import fastifyWebsocket from "@fastify/websocket";
 
-import { activeCollectors, aggregate } from "./data";
+import { activeCollectors, getData } from "./data";
 
 const server = Fastify();
+
+server.register(fastifyWebsocket);
+server.register(async ws_server => {
+	ws_server.get("/api/data", { websocket: true }, socket => {
+		socket.on("message", message => {
+			const id = message.toString();
+			const data = getData(id);
+
+			socket.send(data ?? 0);
+		})
+	});
+});
 
 server.get("/api/collectors", (_ , reply) => {
 	reply.send({
 		"collectors": activeCollectors()
 	});
-})
-
-server.post("/api/data", {
-	schema: {
-		body: {
-			type: "array",
-			items: {
-				type: "string"
-			}
-		}
-	}
-}, (request, reply) => {
-	const ids = request.body;
-	reply.send(aggregate(ids));
 });
 
 server.listen({
