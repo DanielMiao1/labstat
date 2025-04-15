@@ -12,9 +12,7 @@ server.register(async ws_server => {
 			const id = message.toString();
 			const data = getData(id);
 
-      console.log(data);
-
-			socket.send(data);
+			socket.send(`${id} ${data}`);
 		})
 	});
 });

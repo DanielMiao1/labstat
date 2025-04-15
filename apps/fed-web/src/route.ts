@@ -1,4 +1,6 @@
 import mainView from "./views/main";
+import nodeView from "./views/node";
+import getHash from "./util/hash";
 
 async function update() {
 	if (document.getElementsByTagName("main").length) {
@@ -8,19 +10,13 @@ async function update() {
 	const content = document.createElement("main");
 	document.body.appendChild(content);
 
-	const route = (() => {
-		const hash = document.location.hash;
-		if (hash.startsWith("#")) {
-			return hash.slice(1);
-		}
-
-		return hash;
-	})();
-
+	const route = getHash();
 
 	if (!route) {
 		await mainView(content);
-	}
+	} else {
+    await nodeView(content);
+  }
 }
 
 update();
