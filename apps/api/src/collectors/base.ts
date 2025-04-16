@@ -1,3 +1,7 @@
+function isWindows() {
+	return process.platform === "win32";
+}
+
 class Collector {
 	id: string;
 	active = true;
@@ -5,4 +9,5 @@ class Collector {
 	getData(): any;
 }
 
+export { isWindows };
 export default Collector;

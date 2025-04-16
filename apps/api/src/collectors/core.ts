@@ -8,9 +8,10 @@
  * an exclamation mark.
  */
 
-import { networkInterfaces, uptime } from "os";
+import { execSync } from "child_process";
 import { diskLayout, graphics, mem } from "systeminformation";
-import Collector from "./base";
+import { networkInterfaces, uptime } from "os";
+import Collector, { isWindows } from "./base";
 
 class Memory extends Collector {
 	id = "memory";
@@ -52,4 +53,15 @@ class Uptime extends Collector {
 	}
 }
 
-export { Disks, Graphics, Network, Memory, Uptime };
+class Hostname extends Collector {
+	id = "!hostname";
+
+	getData() {
+		const command = isWindows() ? "hostname" : "uname -n";
+		const hostname = execSync(command).toString().slice(0, -1);
+
+		return { hostname }; 
+	}
+}
+
+export { Disks, Graphics, Hostname, Network, Memory, Uptime };

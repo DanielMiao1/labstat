@@ -2,6 +2,24 @@
   font-family: "Maple Mono";
   font-style: normal;
   font-display: swap;
-  font-weight: 600;
-  src: url(https://cdn.jsdelivr.net/fontsource/fonts/maple-mono@latest/latin-600-normal.woff2) format("woff2"), url(https://cdn.jsdelivr.net/fontsource/fonts/maple-mono@latest/latin-600-normal.woff) format("woff");
+  font-weight: 400;
+  src: url(https://cdn.jsdelivr.net/fontsource/fonts/maple-mono@latest/latin-400-normal.woff2) format("woff2"), url(https://cdn.jsdelivr.net/fontsource/fonts/maple-mono@latest/latin-400-normal.woff) format("woff");
+}
+
+@font-face {
+  font-family: "Maple Mono";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 700;
+  src: url(https://cdn.jsdelivr.net/fontsource/fonts/maple-mono@latest/latin-700-normal.woff2) format("woff2"), url(https://cdn.jsdelivr.net/fontsource/fonts/maple-mono@latest/latin-700-normal.woff) format("woff");
+}
+
+.monospace {
+	font-family: "Maple Mono", monospace;
+	font-weight: 700;
+	white-space: pre;
+}
+
+.monospace-light {
+	font-weight: 400;
 }

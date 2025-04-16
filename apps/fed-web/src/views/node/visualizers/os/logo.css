@@ -1,15 +1,15 @@
 @import url("../../../../monospace.css");
 
-#collector-os {
-	display: flex;
-	flex-direction: row;
-}
-
-.ascii-logo {
+.title-logo {
 	font-size: 0.6em;
 }
 
-pre {
-	font-family: "Maple Mono";
-	white-space: pre;
+.subtitle-kernel {
+	font-size: 0.8em;
+	text-align: right;
+}
+
+.subtitle-host {
+	margin-top: 2em;
+	text-align: center;
 }

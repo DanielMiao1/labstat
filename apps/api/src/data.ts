@@ -2,11 +2,11 @@ import type Collector from "./collectors/base";
 import OS from "./collectors/os";
 
 import {
-	Disks, Graphics, Network, Memory, Uptime
+	Disks, Graphics, Hostname ,Network, Memory, Uptime
 } from "./collectors/core";
 
 const all_collectors: Collector[] = [
-  OS, Disks, Graphics, Network, Memory, Uptime
+  OS, Disks, Graphics, Hostname, Network, Memory, Uptime
 ];
 
 const active_collectors = {};

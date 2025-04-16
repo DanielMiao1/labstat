@@ -1,4 +1,5 @@
 import getHash from "../../util/hash";
+import initOS from "./initializers/os";
 import showData from "./visualizer";
 
 let socket: WebSocket;
@@ -53,6 +54,8 @@ async function nodeView(content: HTMLElement) {
 	for (const id of ["os", "disks", "net"]) {
 		createContainer(id);
 	}
+
+	initOS();
 
 	all_collectors.forEach(id => {
 		if (!id.startsWith("!")) {
