@@ -40,7 +40,7 @@ async function initializeSocket(node: string) {
 	});
 }
 
-function refreshData(ids?) {
+function refreshData(ids?: string[]) {
 	(ids ?? collectors).forEach(id => {
 		socket.send(id);
 	});

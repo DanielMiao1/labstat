@@ -1,6 +1,6 @@
 interface RowOptions {
-	tooltip?: string;
 	items: string[];
+	tooltip?: string;
 }
 
 type list_options = RowOptions[]
