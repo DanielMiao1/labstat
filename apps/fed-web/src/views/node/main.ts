@@ -12,15 +12,6 @@ async function getCollectors(node: string): Promise<string[]> {
 	return data.collectors;
 }
 
-async function showCollector(
-	content: HTMLElement,
-	id: string
-) {
-	const container = document.createElement("div");
-	container.id = "collector-" + id;
-	content.appendChild(container);
-}
-
 async function initializeSocket(node: string) {
 	const url = `/api/${node}/data`;
 	socket = new WebSocket(url);
@@ -51,15 +42,13 @@ async function nodeView(content: HTMLElement) {
 	const all_collectors = await getCollectors(node);
 
 	await initializeSocket(node);
+	refreshData(all_collectors);
 	
 	all_collectors.forEach(id => {
-		showCollector(content, id);
 		if (!id.startsWith("!")) {
 			collectors.push(id);
 		}
 	});
-
-	refreshData(all_collectors);
 
 	setInterval(refreshData, 1000);
 }

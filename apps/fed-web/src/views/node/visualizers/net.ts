@@ -1,7 +1,10 @@
 import createCollectorTitle from "../components/title";
 import createList from "../components/list";
 
-function net(data: any, container: HTMLElement) {
+function net(data: any) {
+	const container = document.createElement("div");
+	document.body.appendChild(container);
+	
 	createCollectorTitle(container, "Network Interfaces");
 
 	const table_data = [{

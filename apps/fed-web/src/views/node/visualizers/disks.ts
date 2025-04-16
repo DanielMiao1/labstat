@@ -3,7 +3,10 @@ import createList from "../components/list";
 import readableBytes from "../../../util/units";
 import { truncate } from "../../../util/string";
 
-function disks(data: any, container: HTMLElement) {
+function disks(data: any) {
+	const container = document.createElement("div");
+	document.body.appendChild(container);
+	
 	createCollectorTitle(container, "Disks");
 
 	const table_data = [{
