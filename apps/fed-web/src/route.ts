@@ -1,6 +1,8 @@
 import mainView from "./views/main";
-import nodeView from "./views/node";
+import nodeView from "./views/node/main";
 import getHash from "./util/hash";
+
+import "./main.css";
 
 async function update() {
 	if (document.getElementsByTagName("main").length) {

@@ -8,27 +8,36 @@
  * an exclamation mark.
  */
 
-import { freemem, networkInterfaces, totalmem, uptime } from "os";
+import { networkInterfaces, uptime } from "os";
+import { diskLayout, graphics, mem } from "systeminformation";
 import Collector from "./base";
 
-class TotalMem extends Collector {
-	id = "!total-mem"
+class Memory extends Collector {
+	id = "memory"
 
-	getData() {
-		return totalmem() / 1000000;
+	async getData() {
+		return JSON.stringify(await mem());
 	}
 }
 
-class FreeMem extends Collector {
-	id = "free-mem";
+class Disks extends Collector {
+	id = "!disks";
 
-	getData() {
-		return freemem() / 1000000;
+	async getData() {
+		return JSON.stringify(await diskLayout());
+	}
+}
+
+class Graphics extends Collector {
+	id = "!graphics";
+
+	async getData() {
+		return JSON.stringify(await graphics());
 	}
 }
 
 class Network extends Collector {
-	id = "net";
+	id = "!net";
 
 	getData() {
 		return JSON.stringify(networkInterfaces());
@@ -43,4 +52,4 @@ class Uptime extends Collector {
 	}
 }
 
-export { FreeMem, Network, TotalMem, Uptime };
+export { Disks, Graphics, Network, Memory, Uptime };

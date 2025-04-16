@@ -1,7 +1,10 @@
-import { FreeMem, Network, TotalMem, Uptime } from "./collectors/core";
+import type Collector from "./collectors/base";
+import {
+	Disks, Graphics, Network, Memory, Uptime
+} from "./collectors/core";
 
-const all_collectors = [
-  FreeMem, Network, TotalMem, Uptime
+const all_collectors: Collector[] = [
+  Disks, Graphics, Network, Memory, Uptime
 ];
 
 const active_collectors = {};
@@ -18,7 +21,7 @@ function activeCollectors() {
 	return Object.keys(active_collectors);
 }
 
-function getData(id: string): number {
+function getData(id: string): any {
 	const collector = active_collectors[id];
 
 	if (collector) {

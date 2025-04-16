@@ -8,11 +8,11 @@ const server = Fastify();
 server.register(fastifyWebsocket);
 server.register(async ws_server => {
 	ws_server.get("/api/data", { websocket: true }, socket => {
-		socket.on("message", message => {
+		socket.on("message", async message => {
 			const id = message.toString();
 			const data = getData(id);
 
-			socket.send(`${id} ${data}`);
+			socket.send(`${id} ${await data}`);
 		})
 	});
 });
