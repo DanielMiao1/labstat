@@ -4,6 +4,12 @@ import showData from "./visualizer";
 let socket: WebSocket;
 const collectors: string[] = [];
 
+function createContainer(id: string) {
+	const container = document.createElement("div");
+	container.id = "collector-" + id;
+	document.body.appendChild(container);
+}
+
 async function getCollectors(node: string): Promise<string[]> {
 	const url = `/api/${node}/collectors`;
 	const request = await fetch(url);
@@ -44,6 +50,10 @@ async function nodeView(content: HTMLElement) {
 	await initializeSocket(node);
 	refreshData(all_collectors);
 	
+	for (const id of ["os", "disks", "net"]) {
+		createContainer(id);
+	}
+
 	all_collectors.forEach(id => {
 		if (!id.startsWith("!")) {
 			collectors.push(id);
