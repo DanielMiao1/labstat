@@ -7,6 +7,7 @@ const handlers = {
 }
 
 function showData(id: string, data: string) {
+	console.log(id, data)
 	const container = document.getElementById(`collector-${id}`);
 
 	const handler = handlers[id];

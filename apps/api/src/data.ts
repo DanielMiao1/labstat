@@ -1,10 +1,12 @@
 import type Collector from "./collectors/base";
+import OS from "./collectors/os";
+
 import {
 	Disks, Graphics, Network, Memory, Uptime
 } from "./collectors/core";
 
 const all_collectors: Collector[] = [
-  Disks, Graphics, Network, Memory, Uptime
+  OS, Disks, Graphics, Network, Memory, Uptime
 ];
 
 const active_collectors = {};
@@ -21,11 +23,11 @@ function activeCollectors() {
 	return Object.keys(active_collectors);
 }
 
-function getData(id: string): any {
+async function getData(id: string): any {
 	const collector = active_collectors[id];
 
 	if (collector) {
-		return collector.getData();
+		return JSON.stringify(await collector.getData());
 	}
 
 	return 0;

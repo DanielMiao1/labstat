@@ -10,7 +10,7 @@ server.register(async ws_server => {
 	ws_server.get("/api/data", { websocket: true }, socket => {
 		socket.on("message", async message => {
 			const id = message.toString();
-			const data = getData(id);
+			const data = await getData(id);
 
 			socket.send(`${id} ${await data}`);
 		})

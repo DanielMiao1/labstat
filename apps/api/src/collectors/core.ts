@@ -13,26 +13,26 @@ import { diskLayout, graphics, mem } from "systeminformation";
 import Collector from "./base";
 
 class Memory extends Collector {
-	id = "memory"
+	id = "memory";
 
-	async getData() {
-		return JSON.stringify(await mem());
+	getData() {
+		return mem();
 	}
 }
 
 class Disks extends Collector {
 	id = "!disks";
 
-	async getData() {
-		return JSON.stringify(await diskLayout());
+	getData() {
+		return diskLayout();
 	}
 }
 
 class Graphics extends Collector {
 	id = "!graphics";
 
-	async getData() {
-		return JSON.stringify(await graphics());
+	getData() {
+		return graphics();
 	}
 }
 
@@ -40,7 +40,7 @@ class Network extends Collector {
 	id = "!net";
 
 	getData() {
-		return JSON.stringify(networkInterfaces());
+		return networkInterfaces();
 	}
 }
 
