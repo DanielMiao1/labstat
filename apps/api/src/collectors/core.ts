@@ -64,4 +64,4 @@ class Hostname extends Collector {
 	}
 }
 
-export { Disks, Graphics, Hostname, Network, Memory, Uptime };
+export { Disks, Graphics, Hostname, Memory, Network, Uptime };

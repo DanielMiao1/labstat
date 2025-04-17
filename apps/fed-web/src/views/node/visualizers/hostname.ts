@@ -1,6 +1,6 @@
 import getHash from "../../../util/hash";
 
-function hostname(data: any, container: HTMLElement) {
+function hostname(data: any) {
 	const subtitle = document.getElementById("subtitle-host");
 	const text = `${data.hostname} - ${getHash()}`;
 	subtitle.innerText = text;

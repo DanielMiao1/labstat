@@ -1,5 +1,6 @@
 import getHash from "../../util/hash";
 import initOS from "./initializers/os";
+import initSpecs from "./initializers/specs";
 import showData from "./visualizer";
 
 import "./node.css";
@@ -8,8 +9,11 @@ let socket: WebSocket;
 const collectors: string[] = [];
 
 function createContainer(id: string, parent: HTMLElement) {
+	const inline_container = document.createElement("div");
+	parent.appendChild(inline_container);
+
 	const container = document.createElement("div");
-	parent.appendChild(container);
+	inline_container.appendChild(container);
 	container.classList.add("collector");
 	container.id = "collector-" + id;
 }
@@ -56,11 +60,12 @@ async function nodeView(content: HTMLElement) {
 	await initializeSocket(node);
 	refreshData(all_collectors);
 	
-	for (const id of ["os", "disks", "net"]) {
+	for (const id of ["os", "specs", "disks", "net", "graphics"]) {
 		createContainer(id, content);
 	}
 
 	initOS();
+	initSpecs();
 
 	all_collectors.forEach(id => {
 		if (!id.startsWith("!")) {
