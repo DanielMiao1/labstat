@@ -9,12 +9,11 @@
 		"experimentalDecorators": true,
 		"importHelpers": true,
 		"target": "es2015",
-		"module": "esnext",
 		"lib": ["es2020", "dom"],
+		"module": "esnext",
 		"skipLibCheck": true,
 		"skipDefaultLibCheck": true,
-		"baseUrl": ".",
-		"paths": {}
+		"baseUrl": "."
 	},
 	"exclude": ["node_modules"]
 }

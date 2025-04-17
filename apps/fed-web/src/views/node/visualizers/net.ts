@@ -2,7 +2,8 @@ import createCollectorTitle from "../components/title";
 import createList from "../components/list";
 
 function net(data: any) {
-	const container = document.getElementById("collector-net");
+	const container = document.getElementById("collector-!net");
+	if (!container) return;
 	
 	createCollectorTitle(container, "Network Interfaces");
 

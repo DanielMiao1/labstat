@@ -1,13 +1,14 @@
 import type Collector from "./collectors/base";
 import OS from "./collectors/os";
-import Specs from "./collectors/specs";
 
 import {
 	Disks, Graphics, Hostname, Memory, Network, Uptime
 } from "./collectors/core";
 
+import { LoadAvg } from "./collectors/cpu";
+
 const all_collectors: Collector[] = [
-	Disks, Graphics, Hostname, Memory, Network, OS, Specs, Uptime
+	Disks, Graphics, Hostname, LoadAvg, Memory, Network, OS, Uptime
 ];
 
 const active_collectors = {};

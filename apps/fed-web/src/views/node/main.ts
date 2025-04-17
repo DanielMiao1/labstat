@@ -1,6 +1,6 @@
 import getHash from "../../util/hash";
+import initLoadavg from "./initializers/loadavg/main";
 import initOS from "./initializers/os";
-import initSpecs from "./initializers/specs";
 import showData from "./visualizer";
 
 import "./node.css";
@@ -8,12 +8,11 @@ import "./node.css";
 let socket: WebSocket;
 const collectors: string[] = [];
 
-function createContainer(id: string, parent: HTMLElement) {
-	const inline_container = document.createElement("div");
-	parent.appendChild(inline_container);
+const INIT_COLLECTORS = ["!os", "loadavg", "!disks", "!net", "!graphics"];
 
+function createContainer(id: string, parent: HTMLElement) {
 	const container = document.createElement("div");
-	inline_container.appendChild(container);
+	parent.appendChild(container);
 	container.classList.add("collector");
 	container.id = "collector-" + id;
 }
@@ -60,12 +59,17 @@ async function nodeView(content: HTMLElement) {
 	await initializeSocket(node);
 	refreshData(all_collectors);
 	
-	for (const id of ["os", "specs", "disks", "net", "graphics"]) {
-		createContainer(id, content);
-	}
+	INIT_COLLECTORS.forEach(init_collector => {
+		all_collectors.some(collector => {
+			if (init_collector === collector) {
+				createContainer(collector, content);
+				return true;
+			}
+		});
+	});
 
+	initLoadavg();
 	initOS();
-	initSpecs();
 
 	all_collectors.forEach(id => {
 		if (!id.startsWith("!")) {

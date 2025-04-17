@@ -1,17 +1,17 @@
 import disks from "./visualizers/disks";
 import graphics from "./visualizers/graphics";
 import hostname from "./visualizers/hostname";
+import loadavg from "./visualizers/loadavg";
 import net from "./visualizers/net";
 import os from "./visualizers/os/main";
-import specs from "./visualizers/specs/main";
 
 const handlers = {
 	"!disks": disks,
 	"!graphics": graphics,
 	"!hostname": hostname,
+	"loadavg": loadavg,
 	"!net": net,
-	"!os": os,
-	"!specs": specs
+	"!os": os
 }
 
 function showData(id: string, data: string) {

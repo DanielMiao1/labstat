@@ -18,3 +18,23 @@ body {
 	font-family: Inter, sans-serif;
 	font-weight: 400;
 }
+
+.p-small {
+	font-size: 0.8em;
+}
+
+.p-large {
+	font-size: 2em;
+}
+
+.p-xlarge {
+	font-size: 5em;
+}
+
+.p-bold {
+	font-weight: 700;
+}
+
+.p-center {
+	text-align: center;
+}

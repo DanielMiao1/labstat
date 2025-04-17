@@ -1,13 +1,13 @@
 function initOS() {
-	const container = document.getElementById("collector-os");
+	const container = document.getElementById("collector-!os");
 	if (!container) return;
 
-	container.classList.add("flex-row", "nobg");
+	container.classList.add("title-container", "flex-row", "nobg");
 
 	const logo = document.createElement("p");
 	container.appendChild(logo);
 	logo.id = "title-logo";
-	logo.classList.add("title-logo", "monospace");
+	logo.classList.add("title-logo", "p-small", "monospace");
 
 	const title = document.createElement("div");
 	title.classList.add("page-title")

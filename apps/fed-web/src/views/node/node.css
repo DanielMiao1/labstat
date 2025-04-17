@@ -4,15 +4,15 @@
 		flex-direction: row;
 		flex-wrap: wrap;
 		gap: 3.2em;
-		padding: 3.2em;
+		padding: 4.4em 3.2em 3.2em;
 	}
 
 	.collector {
-		border-radius: 14px;
+		border-radius: 20px;
 		display: flex;
 		flex-direction: column;
 		gap: 1em;
-		padding: 1.8em;
+		padding: 2.2em;
 
 		&:not(.nobg) {
 			background-color: #fff1;

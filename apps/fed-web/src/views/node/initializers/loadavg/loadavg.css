@@ -1,0 +1,9 @@
+.loadavg-data {
+	gap: 2em;
+	margin: auto;
+	padding: 0 1.5em;
+}
+
+.loadavg-bottom {
+	gap: 4em;
+}

@@ -6,6 +6,7 @@
  */
 
 import json from "./os_aliases.json"
+import { padNewLine } from "../../../../util/string";
 
 const OS_ALIAS = json.aliases;
 
@@ -47,7 +48,10 @@ async function getLogo(os: string) {
 	if (!request.ok) return "[Logo not found]";
 
 	const response = await request.text();
-	return removeBashVariables(response);
+	const cleaned_text = removeBashVariables(response);
+	const padded_text = padNewLine(cleaned_text, 23);
+
+	return padded_text;
 }
 
 export default getLogo;

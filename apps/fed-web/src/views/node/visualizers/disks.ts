@@ -4,7 +4,8 @@ import readableBytes from "../../../util/units";
 import { truncate } from "../../../util/string";
 
 function disks(data: any) {
-	const container = document.getElementById("collector-disks");
+	const container = document.getElementById("collector-!disks");
+	if (!container) return;
 	
 	createCollectorTitle(container, "Disks");
 
