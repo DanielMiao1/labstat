@@ -1,0 +1,25 @@
+{
+	"aliases": {
+		"Alpine Linux": "alpine",
+		"Amazon Linux": "amazon",
+		"Amazon Linux AMI": "amazon",
+		"Arch Linux": "arch",
+		"Arch Linux ARM": "arch",
+		"ArcoLinux": "arco",
+		"CentOS Linux": "centos",
+		"CentOS Stream": "centos",
+		"Debian GNU/Linux": "debian",
+		"Fedora Linux": "fedora",
+		"Kali GNU/Linux": "kali",
+		"Linux Mint": "linuxmint",
+		"Manjaro Linux": "manjaro",
+		"Manjaro ARM": "manjaro",
+		"openSUSE Leap": "opensuse_leap",
+		"Oracle Linux Server": "oracle",
+		"Pop!_OS": "pop",
+		"Raspbian GNU/Linux": "raspbian",
+		"Red Hat Enterprise Linux": "rhel",
+		"Red Hat Enterprise Linux Server": "rhel",
+		"Rocky Linux": "rocky"
+	}
+}
