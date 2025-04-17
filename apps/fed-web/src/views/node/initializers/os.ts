@@ -14,7 +14,7 @@ function initOS() {
 	const title_text = document.createElement("p");
 	title.appendChild(title_text);
 	title_text.id = "title-text";
-	title_text.classList.add("monospace");
+	title_text.classList.add("title-text", "monospace");
 
 	const kernel_info = document.createElement("p");
 	title.appendChild(kernel_info);

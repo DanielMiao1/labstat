@@ -38,7 +38,6 @@ function removeBashVariables(text) {
 
 async function getLogo(os: string) {
 	const name = OS_ALIAS[os] ?? os.toLowerCase();
-
 	if (name.includes(" ")) return "[Logo not found]";
 
 	const url = `https://raw.githubusercontent.com/fastfetch-cli/fastfetch/refs/tags/2.41.0/src/logo/ascii/${name}.txt`;
