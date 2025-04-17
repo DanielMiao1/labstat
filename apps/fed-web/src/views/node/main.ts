@@ -9,8 +9,9 @@ const collectors: string[] = [];
 
 function createContainer(id: string, parent: HTMLElement) {
 	const container = document.createElement("div");
-	container.id = "collector-" + id;
 	parent.appendChild(container);
+	container.classList.add("collector");
+	container.id = "collector-" + id;
 }
 
 async function getCollectors(node: string): Promise<string[]> {

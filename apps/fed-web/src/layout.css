@@ -1,3 +1,17 @@
+table {
+	border-spacing: 1em 0.6em;
+	border-collapse: separate;
+	margin-left: -1em;
+
+	& > :first-child {
+		font-weight: 700;
+	}
+
+	td {
+		padding: 0;
+	}
+}
+
 .flex-row {
 	display: flex;
 	flex-direction: row;

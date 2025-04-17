@@ -1,6 +1,8 @@
 function initOS() {
 	const container = document.getElementById("collector-os");
-	container.classList.add("flex-row");
+	if (!container) return;
+
+	container.classList.add("flex-row", "nobg");
 
 	const logo = document.createElement("p");
 	container.appendChild(logo);

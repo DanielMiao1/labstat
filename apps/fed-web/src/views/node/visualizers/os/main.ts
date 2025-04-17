@@ -1,7 +1,7 @@
 import assignColor from "./color";
 import getLogo from "./logo";
 
-import "./logo.css";
+import "./title.css";
 
 function os(data: any, container: HTMLElement) {
 	assignColor(data.os);

@@ -1,9 +1,9 @@
 @import url("../../../../monospace.css");
 @import url("./colors.css");
 
-body[data-view="node"] {
+:where(body[data-view="node"]) {
 	.title-logo {
-		font-size: 0.6em;
+		font-size: 0.65em;
 	}
 
 	.page-title {
@@ -18,5 +18,10 @@ body[data-view="node"] {
 	.subtitle-host {
 		margin-top: 2em;
 		text-align: center;
+	}
+
+	.title {
+		font-weight: 700;
+		font-size: 1.2em;
 	}
 }
