@@ -41,7 +41,9 @@ module.exports = {
 		]
 	},
 	plugins: [
-		new rspack.HtmlRspackPlugin()
+		new rspack.HtmlRspackPlugin({
+			template: "apps/fed-web/src/index.html"
+		})
 	],
 	output: {
 		path: resolve(process.cwd(), "dist/fed-web")

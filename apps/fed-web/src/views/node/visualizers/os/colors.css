@@ -1,5 +1,6 @@
 .title,
 .title-logo,
-.title-text {
+.title-text,
+.subtitle-kernel {
 	color: var(--fg);
 }
