@@ -4,6 +4,10 @@
 	font-size: 0.6em;
 }
 
+.page-title {
+	margin: 1em 0 0 2em;
+}
+
 .subtitle-kernel {
 	font-size: 0.8em;
 	text-align: right;

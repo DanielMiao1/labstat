@@ -6,6 +6,10 @@
 
 body {
 	background-color: #333;
-	padding: 1.2em;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	gap: 3.2em;
+	padding: 3.2em;
 	color: white;
 }
