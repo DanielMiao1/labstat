@@ -1,0 +1,9 @@
+body[data-view="node"] {
+	main {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		gap: 3.2em;
+		padding: 3.2em;
+	}
+}

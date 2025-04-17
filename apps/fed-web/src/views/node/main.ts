@@ -2,13 +2,15 @@ import getHash from "../../util/hash";
 import initOS from "./initializers/os";
 import showData from "./visualizer";
 
+import "./node.css";
+
 let socket: WebSocket;
 const collectors: string[] = [];
 
-function createContainer(id: string) {
+function createContainer(id: string, parent: HTMLElement) {
 	const container = document.createElement("div");
 	container.id = "collector-" + id;
-	document.body.appendChild(container);
+	parent.appendChild(container);
 }
 
 async function getCollectors(node: string): Promise<string[]> {
@@ -45,6 +47,8 @@ function refreshData(ids?: string[]) {
 }
 
 async function nodeView(content: HTMLElement) {
+	document.body.dataset.view = "node";
+	
 	const node = getHash();
 	const all_collectors = await getCollectors(node);
 
@@ -52,7 +56,7 @@ async function nodeView(content: HTMLElement) {
 	refreshData(all_collectors);
 	
 	for (const id of ["os", "disks", "net"]) {
-		createContainer(id);
+		createContainer(id, content);
 	}
 
 	initOS();

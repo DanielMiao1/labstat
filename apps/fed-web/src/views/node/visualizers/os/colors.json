@@ -1,5 +1,37 @@
 {
 	"colors": {
-		"Arch Linux": "#1793D1"
+		"AIX": "#6FDC8C",
+		"AlmaLinux": "#83db28",
+		"Alpine Linux": "#0294d7",
+		"Amazon Linux": "#fe9800",
+		"Amazon Linux AMI": "#fe9800",
+		"Arch Linux": "#31aeec",
+		"Arch Linux ARM": "#31aeec",
+		"ArcoLinux": "#6e93e6",
+		"CentOS Linux": "#e5aa43",
+		"CentOS Stream": "#d96bbd",
+		"Debian GNU/Linux": "#ff1269",
+		"elementary OS": "#41b5ea",
+		"EndeavourOS": "#b072ee",
+		"Fedora": "#51a2da",
+		"Fedora Linux": "#51a2da",
+		"FreeBSD": "#ee5d68",
+		"Gentoo": "#afb4fe",
+		"Kali GNU/Linux": "#2475f4",
+		"Linux Mint": "#6ab53f",
+		"macOS": "#9a9a9a",
+		"Manjaro Linux": "#35bfa4",
+		"Manjaro Linux ARM": "#35bfa4",
+		"NixOS": "#7eb8e3",
+		"OpenBSD": "#f5e07a",
+		"openSUSE Leap": "#73ba25",
+		"Oracle Linux Server": "#ca4836",
+		"Pop!_OS": "#46bac8",
+		"Raspbian GNU/Linux": "#d51f54",
+		"Red Hat Enterprise Linux": "#e50000",
+		"Red Hat Enterprise Linux Server": "#e50000",
+		"Rocky Linux": "#0eba80",
+		"Ubuntu": "#e95420",
+		"Windows": "#0079d5"
 	}
 }

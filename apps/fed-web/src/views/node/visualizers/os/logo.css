@@ -1,20 +1,22 @@
 @import url("../../../../monospace.css");
 @import url("./colors.css");
 
-.title-logo {
-	font-size: 0.6em;
-}
+body[data-view="node"] {
+	.title-logo {
+		font-size: 0.6em;
+	}
 
-.page-title {
-	margin: 1em 0 0 2em;
-}
+	.page-title {
+		margin: 1em 0 0 2em;
+	}
 
-.subtitle-kernel {
-	font-size: 0.8em;
-	text-align: right;
-}
+	.subtitle-kernel {
+		font-size: 0.8em;
+		text-align: right;
+	}
 
-.subtitle-host {
-	margin-top: 2em;
-	text-align: center;
+	.subtitle-host {
+		margin-top: 2em;
+		text-align: center;
+	}
 }
