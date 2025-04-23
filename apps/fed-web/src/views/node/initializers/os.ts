@@ -2,7 +2,7 @@ function initOS() {
 	const container = document.getElementById("collector-!os");
 	if (!container) return;
 
-	container.classList.add("title-container", "flex-row", "nobg");
+	container.classList.add("title-container", "flex-row", "flex-fill", "nobg");
 
 	const logo = document.createElement("p");
 	container.appendChild(logo);

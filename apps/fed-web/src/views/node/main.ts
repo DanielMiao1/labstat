@@ -1,5 +1,6 @@
 import getHash from "../../util/hash";
 import initLoadavg from "./initializers/loadavg/main";
+import initMemory from "./initializers/memory/main";
 import initOS from "./initializers/os";
 import showData from "./visualizer";
 
@@ -8,7 +9,7 @@ import "./node.css";
 let socket: WebSocket;
 const collectors: string[] = [];
 
-const INIT_COLLECTORS = ["!os", "loadavg", "!disks", "!net", "!graphics"];
+const INIT_COLLECTORS = ["!os", "loadavg", "memory", "!disks", "!net", "!graphics"];
 
 function createContainer(id: string, parent: HTMLElement) {
 	const container = document.createElement("div");
@@ -69,6 +70,7 @@ async function nodeView(content: HTMLElement) {
 	});
 
 	initLoadavg();
+	initMemory();
 	initOS();
 
 	all_collectors.forEach(id => {
