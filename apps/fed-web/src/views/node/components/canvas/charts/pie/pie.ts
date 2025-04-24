@@ -1,6 +1,17 @@
-import createCanvas, { type CanvasOptions } from "../main";
-import { normalizeAngle } from "../../../../../util/math/geometry";
-import { pointInSector, type Sector } from "../../../../../util/math/circle";
+import createCanvas, { type CanvasOptions } from "../../main";
+import { normalizeAngle } from "../../../../../../util/math/geometry";
+import { showLabel, hideLabel } from "../label";
+import styleLabel from "./sectorlabel";
+
+import {
+	pointInSector,
+	type Circle,
+	type Sector
+} from "../../../../../../util/math/circle";
+
+interface StyledSector extends Sector {
+	name: string;
+}
 
 interface PieOptions extends CanvasOptions { };
 interface PieUpdateOptions {
@@ -9,11 +20,17 @@ interface PieUpdateOptions {
 }
 
 function pieChart(options: PieOptions) {
+	import("./pie.css");
+
 	const canvas = createCanvas({
 		"size": options.size
 	});
 
 	const midpoint = Math.floor(options.size / 2);
+
+	canvas.addEventListener("mouseleave", () => {
+		hideLabel();
+	});
 
 	canvas.addEventListener("mousemove", event => {
 		const canvas_rect = canvas.getBoundingClientRect();
@@ -32,20 +49,28 @@ function pieChart(options: PieOptions) {
 		})();
 
 		if (!sectors) return;
+
+		const circle = {
+			origin: {
+				x: midpoint,
+				y: midpoint
+			},
+			radius: midpoint - 10
+		};
 		
-		sectors.forEach(sector => {
-			const included = pointInSector({ x, y }, {
-				origin: {
-					x: midpoint,
-					y: midpoint
-				},
-				radius: midpoint
-			}, sector);
+		sectors.some((sector: StyledSector) => {
+			const included = pointInSector({ x, y }, circle, sector);
 
 			if (included) {
-				console.log(sector.name);
+				const label = showLabel();
+				styleLabel({
+					allowed: canvas.parentNode,
+					avoidTopLeft: 1
+				}, label, canvas, circle, sector);
+
+				return true;
 			}
-		});
+		}) || hideLabel(); // Hide label if no setor is found
 	});
 
 	return canvas;
@@ -66,7 +91,7 @@ function pieUpdate(canvas: HTMLCanvasElement, options: PieUpdateOptions) {
 	const midpoint = Math.floor(size / 2);
 
 	let current_angle = -Math.PI / 2;
-	const sectors: Sector[] = [];
+	const sectors: StyledSector[] = [];
 
 	sorted_keys.forEach(key => {
 		const value = values[key];
@@ -85,7 +110,7 @@ function pieUpdate(canvas: HTMLCanvasElement, options: PieUpdateOptions) {
 		ctx.fillStyle = options.colors[key];
 		ctx.beginPath();
 		ctx.moveTo(midpoint, midpoint);
-		ctx.arc(midpoint, midpoint, midpoint, current_angle, end_angle);
+		ctx.arc(midpoint, midpoint, midpoint - 10, current_angle, end_angle);
 		ctx.lineTo(midpoint, midpoint);
 		ctx.closePath();
 		ctx.fill();
@@ -97,3 +122,4 @@ function pieUpdate(canvas: HTMLCanvasElement, options: PieUpdateOptions) {
 }
 
 export { pieChart, pieUpdate };
+export type { StyledSector };

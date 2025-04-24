@@ -10,6 +10,25 @@ interface Sector {
 	end: number;
 }
 
+function sectorCrossesZero(sector: Sector): boolean {
+	return sector.start > sector.end;
+}
+
+function sectorCentralAngle(sector: Sector): number {
+	/**
+	 * Calculates the central angle measure, in radians, of a sector.
+	 */
+
+	if (sectorCrossesZero(sector)) {
+		const first = 2 * Math.PI - sector.start;
+		const end = sector.end;
+
+		return first + end;
+	}
+
+	return sector.end - sector.start;
+}
+
 function pointInSector(point: Point, circle: Circle, sector: Sector) {
 	/**
 	 * Check if a point is within a sector. Expects radians for sector start/end
@@ -24,7 +43,7 @@ function pointInSector(point: Point, circle: Circle, sector: Sector) {
 	const point_angle = normalizeAngle(Math.atan2(relative.y, relative.x));
 	
 	// Check whether the sector crosses the zero-degree angle
-	if (sector.start > sector.end) {
+	if (sectorCrossesZero(sector)) {
 		if (point_angle > sector.end && point_angle < sector.start) {
 			return false;
 		}
@@ -37,4 +56,29 @@ function pointInSector(point: Point, circle: Circle, sector: Sector) {
 	return point_radius < circle.radius;
 }
 
-export { pointInSector, type Sector };
+function sectorBisector(sector: Sector): number {
+	/**
+	 * Returns the bisecting angle, in radians, of a provided sector.
+	 */
+
+	const central_angle = sectorCentralAngle(sector);
+	const bisecting_central = central_angle / 2;
+	const bisector = sector.start + bisecting_central;
+
+	return normalizeAngle(bisector);
+}
+
+function pointOnCircle(circle: Circle, angle: number): Point {
+	/**
+	 * Finds the coordinates of a point on the edges of a circle at the specified
+	 * central angle.
+	 */
+
+	const x = circle.radius * Math.cos(angle) + circle.origin.x;
+	const y = circle.radius * Math.sin(angle) + circle.origin.y;
+
+	return { x, y };
+}
+
+export { pointInSector, pointOnCircle, sectorBisector };
+export type { Circle, Sector };

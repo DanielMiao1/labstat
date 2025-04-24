@@ -10,7 +10,7 @@ function initMemory() {
 	createCollectorTitle(container, "Memory");
 
 	const canvas = pieChart({
-		size: 260
+		size: 280
 	});
 	container.appendChild(canvas);
 	canvas.id = "memory-canvas";

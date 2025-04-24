@@ -1,0 +1,9 @@
+.chart-label {
+	color: var(--sector-color);
+	display: none;
+	position: absolute;
+
+	&.active {
+		display: block;
+	}
+}

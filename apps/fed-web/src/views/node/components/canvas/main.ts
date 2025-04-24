@@ -15,4 +15,4 @@ function createCanvas(options: CanvasOptions): HTMLCanvasElement {
 
 export default createCanvas;
 export { type CanvasOptions };
-export * from "./charts/pie";
+export * from "./charts/pie/pie";
