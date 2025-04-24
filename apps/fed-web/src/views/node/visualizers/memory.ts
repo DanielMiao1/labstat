@@ -18,7 +18,7 @@ const PIE_COLORS = {
 
 function memory(data: any) {
 	const canvas = document.getElementById("memory-canvas");
-	console.log(data);
+	
 	pieUpdate(canvas, {
 		colors: PIE_COLORS,
 		values: data
