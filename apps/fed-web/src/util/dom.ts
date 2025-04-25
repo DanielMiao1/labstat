@@ -1,5 +1,12 @@
 import type { Point } from "./math/geometry";
 
+interface EdgePositions {
+	top: number;
+	bottom: number;
+	left: number;
+	right: number;
+}
+
 function absolutePosition(element: HTMLElement): Point {
 	const element_rect = element.getBoundingClientRect();
 
@@ -9,4 +16,16 @@ function absolutePosition(element: HTMLElement): Point {
 	}
 }
 
-export { absolutePosition };
+function edgePositions(element: HTMLElement): EdgePositions {
+	const { x, y } = absolutePosition(element);
+	const { width, height } = element.getBoundingClientRect();
+
+	return {
+		top: y,
+		bottom: y + height,
+		left: x,
+		right: x + width
+	};
+}
+
+export { absolutePosition, edgePositions };

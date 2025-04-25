@@ -1,3 +1,7 @@
+.contains-piechart-label {
+	position: relative;
+}
+
 .chart-label {
 	color: var(--sector-color);
 	display: none;

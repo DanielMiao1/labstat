@@ -1,10 +1,10 @@
-function showLabel(): HTMLElement {
+function showLabel(container?: HTMLElement): HTMLElement {
 	const label = (() => {
 		let element = document.getElementById("chart-label");
 		if (element) return element;
 
 		element = document.createElement("p");
-		document.body.appendChild(element);
+		(container ?? document.body).appendChild(element);
 		element.id = "chart-label";
 		element.classList.add("chart-label");
 		return element;

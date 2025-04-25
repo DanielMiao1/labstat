@@ -1,7 +1,7 @@
 import createCanvas, { type CanvasOptions } from "../../main";
+import { hideLabel } from "../label";
 import { normalizeAngle } from "../../../../../../util/math/geometry";
-import { showLabel, hideLabel } from "../label";
-import styleLabel from "./sectorlabel";
+import styleLabel from "./label/main";
 
 import {
 	pointInSector,
@@ -10,6 +10,7 @@ import {
 } from "../../../../../../util/math/circle";
 
 interface StyledSector extends Sector {
+	color: string;
 	name: string;
 }
 
@@ -50,7 +51,7 @@ function pieChart(options: PieOptions) {
 
 		if (!sectors) return;
 
-		const circle = {
+		const circle: Circle = {
 			origin: {
 				x: midpoint,
 				y: midpoint
@@ -62,11 +63,10 @@ function pieChart(options: PieOptions) {
 			const included = pointInSector({ x, y }, circle, sector);
 
 			if (included) {
-				const label = showLabel();
 				styleLabel({
-					allowed: canvas.parentNode,
-					avoidTopLeft: 1
-				}, label, canvas, circle, sector);
+					avoid: [0],
+					container: canvas.parentNode
+				}, canvas, circle, sector);
 
 				return true;
 			}
@@ -101,19 +101,22 @@ function pieUpdate(canvas: HTMLCanvasElement, options: PieUpdateOptions) {
 		const delta = 2 * percent * Math.PI;
 		const end_angle = current_angle + delta;
 
-		sectors.push({
-			start: normalizeAngle(current_angle),
-			end: normalizeAngle(end_angle),
-			name: key
-		});
+		const color = options.colors[key];
 		
-		ctx.fillStyle = options.colors[key];
+		ctx.fillStyle = color;
 		ctx.beginPath();
 		ctx.moveTo(midpoint, midpoint);
 		ctx.arc(midpoint, midpoint, midpoint - 10, current_angle, end_angle);
 		ctx.lineTo(midpoint, midpoint);
 		ctx.closePath();
 		ctx.fill();
+
+		sectors.push({
+			start: normalizeAngle(current_angle),
+			end: normalizeAngle(end_angle),
+			color,
+			name: key
+		});
 
 		current_angle = end_angle;
 	});

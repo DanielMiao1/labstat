@@ -7,6 +7,7 @@ function initMemory() {
 	const container = document.getElementById("collector-memory");
 	if (!container) return;
 
+	container.classList.add("contains-piechart-label");
 	createCollectorTitle(container, "Memory");
 
 	const canvas = pieChart({
