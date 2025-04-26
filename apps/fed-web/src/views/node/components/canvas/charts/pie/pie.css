@@ -2,12 +2,16 @@
 	position: relative;
 }
 
-.chart-label {
+.piechart-label {
 	color: var(--sector-color);
 	display: none;
 	position: absolute;
 
 	&.active {
 		display: block;
+	}
+
+	svg {
+		position: absolute;
 	}
 }

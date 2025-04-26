@@ -30,7 +30,7 @@ function pieChart(options: PieOptions) {
 	const midpoint = Math.floor(options.size / 2);
 
 	canvas.addEventListener("mouseleave", () => {
-		hideLabel();
+		hideLabel(canvas.parentNode);
 	});
 
 	canvas.addEventListener("mousemove", event => {
@@ -70,7 +70,7 @@ function pieChart(options: PieOptions) {
 
 				return true;
 			}
-		}) || hideLabel(); // Hide label if no setor is found
+		}) || hideLabel(canvas.parentNode); // Hide label if no setor is found
 	});
 
 	return canvas;

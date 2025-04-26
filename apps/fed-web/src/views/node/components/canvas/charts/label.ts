@@ -1,12 +1,15 @@
-function showLabel(container?: HTMLElement): HTMLElement {
+function showLabel(container: HTMLElement = document.body): HTMLElement {
 	const label = (() => {
-		let element = document.getElementById("chart-label");
+		let element = container.getElementsByClassName("piechart-label")[0];
 		if (element) return element;
 
-		element = document.createElement("p");
-		(container ?? document.body).appendChild(element);
-		element.id = "chart-label";
-		element.classList.add("chart-label");
+		element = document.createElement("div");
+		container.appendChild(element);
+		element.classList.add("piechart-label");
+
+		const text = document.createElement("p");
+		element.appendChild(text);
+
 		return element;
 	})();
 
@@ -14,8 +17,8 @@ function showLabel(container?: HTMLElement): HTMLElement {
 	return label;
 }
 
-function hideLabel() {
-	const label = document.getElementById("chart-label");
+function hideLabel(container: HTMLElement = document.body) {
+	const label = container.getElementsByClassName("piechart-label")[0];
 	if (!label) return;
 
 	label.classList.remove("active");

@@ -1,5 +1,6 @@
 import { absolutePosition } from "../../../../../../../util/dom";
 import chooseCorner from "./corners";
+import createLine from "./line";
 import { showLabel } from "../../label";
 import type { Point } from "../../../../../../../util/math/geometry";
 import type { StyledSector } from "../pie";
@@ -8,7 +9,7 @@ import {
 	pointOnCircle,
 	sectorBisector,
 	type Circle
-} from "../../../../../../../util/math/circle";.
+} from "../../../../../../../util/math/circle";
 
 interface Area {
 	/**
@@ -46,6 +47,8 @@ function tailPosition(
 	};
 }
 
+function initSVG(label: SVGEle) {}
+
 function styleLabel(
 	area: Area,
 	canvas: HTMLCanvasElement,
@@ -62,9 +65,10 @@ function styleLabel(
 	 */
 
 	const label = showLabel(area.container);
-
-	label.innerText = sector.name;
 	label.style.setProperty("--sector-color", sector.color);
+
+	const text_element = label.getElementsByTagName("p")[0];
+	text_element.innerText = sector.name;
 
 	const tail_pos = tailPosition(canvas, circle, sector);
 	const { x, y } = chooseCorner(area, tail_pos);
@@ -75,6 +79,8 @@ function styleLabel(
 
 	label.style[x] = "20px";
 	label.style[y] = "20px";
+
+	createLine(label);
 }
 
 export default styleLabel;
