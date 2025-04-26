@@ -21,11 +21,11 @@ all_collectors.forEach(collector => {
 	}
 });
 
-function activeCollectors() {
+function activeCollectors(): string[] {
 	return Object.keys(active_collectors);
 }
 
-async function getData(id: string): any {
+async function getData(id: string): unknown {
 	const collector = active_collectors[id];
 
 	if (collector) {

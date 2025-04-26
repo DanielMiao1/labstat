@@ -1,6 +1,4 @@
-import createCollectorTitle from "../components/title";
-
-function loadavg(data: any) {
+function loadavg(data: unknown) {
 	const container = document.getElementById("collector-loadavg");
 	if (!container) return;
 

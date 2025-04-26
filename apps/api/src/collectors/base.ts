@@ -6,7 +6,7 @@ class Collector {
 	id: string;
 	active = true;
 
-	getData(): any;
+	getData(): unknown;
 }
 
 export { isWindows };

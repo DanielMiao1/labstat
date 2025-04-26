@@ -1,49 +1,17 @@
-import nx from "@nx/eslint-plugin";
+import eslint from "@eslint/js";
+import { globalIgnores } from "eslint/config";
+import tseslint from "typescript-eslint";
 
-export default [
-	...nx.configs["flat/base"],
-	...nx.configs["flat/typescript"],
-	...nx.configs["flat/javascript"],
+export default tseslint.config(
+  eslint.configs.recommended,
+  tseslint.configs.strict,
+  tseslint.configs.stylistic,
+	globalIgnores(["dist"]),
 	{
-		ignores: [
-			"**/dist"
-		]
-	},
-	{
-		files: [
-			"**/*.ts",
-			"**/*.tsx",
-			"**/*.js",
-			"**/*.jsx"
-		],
 		rules: {
-			"@nx/enforce-module-boundaries": [
-				"error",
-				{
-					enforceBuildableLibDependency: true,
-					allow: [
-						"^eslint\\.config\\.ts$"
-					],
-					depConstraints: [
-						{
-							sourceTag: "*",
-							onlyDependOnLibsWithTags: [
-								"*"
-							]
-						}
-					]
-				}
+			"@typescript-eslint/no-unused-expressions": [
+				"error", { "allowShortCircuit": true }
 			]
 		}
-	},
-	{
-		files: [
-			"**/*.ts",
-			"**/*.tsx",
-			"**/*.js",
-			"**/*.jsx"
-		],
-		rules: {}
 	}
-];
-
+);

@@ -1,7 +1,7 @@
 import createCollectorTitle from "../components/title";
 import createList from "../components/list";
 
-function graphics(data: any) {
+function graphics(data: unknown) {
 	const container = document.getElementById("collector-!graphics");
 	if (!container) return;
 	

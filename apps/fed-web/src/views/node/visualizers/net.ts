@@ -1,7 +1,7 @@
 import createCollectorTitle from "../components/title";
 import createList from "../components/list";
 
-function net(data: any) {
+function net(data: unknown) {
 	const container = document.getElementById("collector-!net");
 	if (!container) return;
 	

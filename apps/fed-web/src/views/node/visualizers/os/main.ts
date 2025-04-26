@@ -3,7 +3,7 @@ import getLogo from "./logo";
 
 import "./title.css";
 
-function os(data: any) {
+function os(data: unknown) {
 	assignColor(data.os);
 
 	const logo = document.getElementById("title-logo");

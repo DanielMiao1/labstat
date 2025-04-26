@@ -1,6 +1,6 @@
 import getHash from "../../../util/hash";
 
-function hostname(data: any) {
+function hostname(data: unknown) {
 	const subtitle = document.getElementById("subtitle-host");
 	if (!subtitle) return;
 	

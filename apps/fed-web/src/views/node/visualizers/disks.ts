@@ -3,7 +3,7 @@ import createList from "../components/list";
 import readableBytes from "../../../util/units";
 import { truncate } from "../../../util/string";
 
-function disks(data: any) {
+function disks(data: unknown) {
 	const container = document.getElementById("collector-!disks");
 	if (!container) return;
 	

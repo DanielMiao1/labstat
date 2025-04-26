@@ -47,8 +47,6 @@ function tailPosition(
 	};
 }
 
-function initSVG(label: SVGEle) {}
-
 function styleLabel(
 	area: Area,
 	canvas: HTMLCanvasElement,

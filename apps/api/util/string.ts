@@ -1,4 +1,4 @@
-function strip(text: string, match: string, index: number = 0): string {
+function strip(text: string, match: string, index = 0): string {
 	const char_count = match.length;
 	let first, last
 

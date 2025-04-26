@@ -16,7 +16,7 @@ const PIE_COLORS = {
 	"dirty": "#08a"
 }
 
-function memory(data: any) {
+function memory(data: unknown) {
 	const canvas = document.getElementById("memory-canvas");
 	
 	pieUpdate(canvas, {

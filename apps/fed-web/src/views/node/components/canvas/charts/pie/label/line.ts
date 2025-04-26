@@ -7,6 +7,8 @@ function createLine(label: HTMLDivElement) {
 		label.appendChild(element);
 		return element;
 	})();
+
+	return svg;
 }
 
 export default createLine;

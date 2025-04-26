@@ -14,13 +14,12 @@ interface StyledSector extends Sector {
 	name: string;
 }
 
-interface PieOptions extends CanvasOptions { };
 interface PieUpdateOptions {
 	colors: Record<string, string>;
 	values: Record<string, number>;
 }
 
-function pieChart(options: PieOptions) {
+function pieChart(options: CanvasOptions) {
 	import("./pie.css");
 
 	const canvas = createCanvas({
@@ -41,7 +40,7 @@ function pieChart(options: PieOptions) {
 		const sectors = (() => {
 			try {
 				return JSON.parse(canvas.dataset.sectors);
-			} catch (error) {
+			} catch {
 				console.warn(
 					"[canvas/pieChart] failed to parse JSON sectors data. Hover effects"
 					+ "may not work"
