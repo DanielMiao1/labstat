@@ -22,7 +22,7 @@ export default [
 				{
 					enforceBuildableLibDependency: true,
 					allow: [
-						"^.*/eslint(\\.base)?\\.config\\.[cm]?js$"
+						"^eslint\\.config\\.ts$"
 					],
 					depConstraints: [
 						{

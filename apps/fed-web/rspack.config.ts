@@ -1,7 +1,7 @@
-const { resolve } = require("path");
-const { rspack } = require("@rspack/core");
+import { resolve } from "path";
+import { rspack } from "@rspack/core";
 
-module.exports = {
+export default {
 	entry: {
 		main: "./apps/fed-web/src/route.ts"
 	},

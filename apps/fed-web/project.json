@@ -11,7 +11,7 @@
 				"outputPath": "dist/fed-web",
 				"main": "apps/fed-web/src/route.ts",
 				"tsConfig": "apps/fed-web/tsconfig.app.json",
-				"rspackConfig": "apps/fed-web/rspack.config.js"
+				"rspackConfig": "apps/fed-web/rspack.config.ts"
 			},
 			"configurations": {
 				"dev": { },

@@ -7,7 +7,7 @@
 		],
 		"production": [
 			"default",
-			"!{projectRoot}/eslint.config.mjs"
+			"!{projectRoot}/eslint.config.ts"
 		],
 		"sharedGlobals": []
 	},
@@ -44,7 +44,7 @@
 			"cache": true,
 			"inputs": [
 				"default",
-				"{workspaceRoot}/.eslint.config.mjs"
+				"{workspaceRoot}/.eslint.config.ts"
 			]
 		}
 	}
