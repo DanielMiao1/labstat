@@ -1,4 +1,4 @@
-function loadavg(data: unknown) {
+function loadavg(data: [number, number, number]) {
 	const container = document.getElementById("collector-loadavg");
 	if (!container) return;
 

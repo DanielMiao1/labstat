@@ -11,13 +11,15 @@ interface NodeOptions {
 	hostname: string;
 }
 
+type nodes_list = Record<string, NodeOptions>;
+
 const file = join(process.cwd(), "data/fed/nodes.json");
 
-let nodes = {};
+let nodes: nodes_list = {};
 
 function syncFromFile() {
-	const data = readFileSync(file);
-	nodes = JSON.parse(data.toString());
+	const data = readFileSync(file).toString();
+	nodes = JSON.parse(data) as nodes_list;
 }
 
 function initDataFile() {

@@ -1,6 +1,6 @@
 function strip(text: string, match: string, index = 0): string {
 	const char_count = match.length;
-	let first, last
+	let first, last;
 
 	if (index < 0) {
 		const end_index = index + text.length;

@@ -8,7 +8,8 @@ import type { StyledSector } from "../pie";
 import {
 	pointOnCircle,
 	sectorBisector,
-	type Circle
+	type Circle,
+	type Sector
 } from "../../../../../../../util/math/circle";
 
 interface Area {
@@ -71,8 +72,8 @@ function styleLabel(
 	const tail_pos = tailPosition(canvas, circle, sector);
 	const { x, y } = chooseCorner(area, tail_pos);
 
-	EDGES.difference(new Set([x, y])).forEach(className => {
-		label.style[className] = "unset"
+	EDGES.forEach(className => {
+		if (![x, y].includes(className)) label.style[className] = "unset";
 	});
 
 	label.style[x] = "20px";

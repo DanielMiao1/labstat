@@ -1,14 +1,16 @@
 import Collector from "./base";
 import figlet from "figlet";
 import slant from "figlet/importable-fonts/Slant.js";
-import { stripAllQuotes } from "../../util/string";
+import { stripAllQuotes } from "../util/string";
 import { existsSync, readFileSync } from "fs";
 import { execSync } from "child_process";
 
+// eslint-disable-next-line @typescript-eslint/no-unsafe-argument
 figlet.parseFont("Slant", slant);
 
-const PROCESS_PLATFORMS = {
+const PROCESS_PLATFORMS: Record<NodeJS.Platform, string> = {
 	"aix": "AIX",
+	"andriod": "Andriod",
 	"darwin": "macOS",
 	"freebsd": "FreeBSD",
 	"openbsd": "OpenBSD",
@@ -26,7 +28,11 @@ interface FullOSInfo extends OSInfo {
 }
 
 function generateAscii(text: string): Promise<string> {
-	return figlet(text, { font: "Slant" });
+	return new Promise(resolve => {
+		figlet(text, { font: "Slant" }, (_, result: string) => {
+			resolve(result);
+		});
+	});
 }
 
 function identifyOS(): OSInfo {
@@ -46,10 +52,10 @@ function identifyOS(): OSInfo {
 		let version: string;
 
 		lines.some(line => {
-			if (/^NAME="/.test(line)) {
+			if (line.startsWith("NAME=")) {
 				const text = line.slice(5)
 				name = stripAllQuotes(text);
-			} else if (/^VERSION_ID="/.test(line)) {
+			} else if (line.startsWith("VERSION_ID=")) {
 				const text = line.slice(11);
 				version = stripAllQuotes(text);
 			}
@@ -70,7 +76,7 @@ function identifyOS(): OSInfo {
 	}
 }
 
-class OS extends Collector {
+class OS implements Collector {
 	id = "!os";
 
 	async getData(): FullOSInfo {

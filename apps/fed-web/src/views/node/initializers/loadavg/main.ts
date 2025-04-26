@@ -1,7 +1,7 @@
 import createCollectorTitle from "../../components/title";
 
 function initLoadavg() {
-	import("./loadavg.css");
+	void import("./loadavg.css");
 
 	const container = document.getElementById("collector-loadavg");
 	if (!container) return;

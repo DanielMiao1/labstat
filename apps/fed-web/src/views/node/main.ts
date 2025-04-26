@@ -6,6 +6,10 @@ import showData from "./visualizer";
 
 import "./node.css";
 
+interface Collectors {
+	collectors: string[];
+}
+
 let socket: WebSocket;
 const collectors: string[] = [];
 
@@ -21,7 +25,7 @@ function createContainer(id: string, parent: HTMLElement) {
 async function getCollectors(node: string): Promise<string[]> {
 	const url = `/api/${node}/collectors`;
 	const request = await fetch(url);
-	const data = await request.json();
+	const data = await request.json() as Collectors;
 
 	return data.collectors;
 }
@@ -30,8 +34,10 @@ async function initializeSocket(node: string) {
 	const url = `/api/${node}/data`;
 	socket = new WebSocket(url);
 
-	socket.addEventListener("message", message => {
-		const data: string = message.data;
+	socket.addEventListener("message", (message: { data?: string }) => {
+		const data = message.data;
+		if (!data) return;
+		
 		const separator = data.indexOf(" ");
 
 		const id = data.slice(0, separator);
@@ -52,6 +58,7 @@ function refreshData(ids?: string[]) {
 }
 
 async function nodeView(content: HTMLElement) {
+	
 	document.body.dataset.view = "node";
 	
 	const node = getHash();

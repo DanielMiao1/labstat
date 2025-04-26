@@ -1,7 +1,10 @@
 import createCollectorTitle from "../components/title";
 import createList from "../components/list";
+import type { NetworkInterfaceInfo } from "os";
 
-function net(data: unknown) {
+type net_info = Record<string, NetworkInterfaceInfo[]>;
+
+function net(data: net_info) {
 	const container = document.getElementById("collector-!net");
 	if (!container) return;
 	

@@ -6,13 +6,14 @@ import { activeCollectors, getData } from "./data";
 const server = Fastify();
 
 server.register(fastifyWebsocket);
-server.register(async ws_server => {
+server.register(ws_server => {
 	ws_server.get("/api/data", { websocket: true }, socket => {
-		socket.on("message", async message => {
+		socket.on("message", (message: Buffer) => {
 			const id = message.toString();
-			const data = await getData(id);
 
-			socket.send(`${id} ${await data}`);
+			void getData(id).then(data => {
+				socket.send(`${id} ${data}`);
+			});
 		})
 	});
 });

@@ -1,6 +1,6 @@
 function showLabel(container: HTMLElement = document.body): HTMLElement {
 	const label = (() => {
-		let element = container.getElementsByClassName("piechart-label")[0];
+		let element = container.getElementsByClassName("piechart-label").item(0);
 		if (element) return element;
 
 		element = document.createElement("div");
@@ -18,7 +18,7 @@ function showLabel(container: HTMLElement = document.body): HTMLElement {
 }
 
 function hideLabel(container: HTMLElement = document.body) {
-	const label = container.getElementsByClassName("piechart-label")[0];
+	const label = container.getElementsByClassName("piechart-label").item(0);
 	if (!label) return;
 
 	label.classList.remove("active");

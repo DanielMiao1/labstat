@@ -1,7 +1,10 @@
 import createCollectorTitle from "../components/title";
 import createList from "../components/list";
+import type { graphics as graphicsData } from "systeminformation";
 
-function graphics(data: unknown) {
+type graphics_info = Awaited<ReturnType<typeof graphicsData>>;
+
+function graphics(data: graphics_info) {
 	const container = document.getElementById("collector-!graphics");
 	if (!container) return;
 	
@@ -29,16 +32,14 @@ function graphics(data: unknown) {
 				return `${id} (${controller.bus})`;
 			}
 
-			return controller.bus ?? id ?? "";
+			return (controller.bus || id) ?? "";
 		})();
 
 		const vram = (() => {
-			const amount = controller.vram + " MB";
+			if (!controller.vram) return "Unknown";
+			const amount = controller.vram.toString() + " MB";
 
-			if (controller.vramDynamic) {
-				return amount + " (DVMT)";
-			}
-
+			if (controller.vramDynamic) return amount + " (DVMT)";
 			return amount;
 		})();
 

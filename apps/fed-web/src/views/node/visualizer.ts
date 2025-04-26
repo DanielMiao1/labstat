@@ -6,7 +6,9 @@ import memory from "./visualizers/memory";
 import net from "./visualizers/net";
 import os from "./visualizers/os/main";
 
-const handlers = {
+type handler = (data: unknown) => void;
+
+const handlers: Record<string, handler | null> = {
 	"!disks": disks,
 	"!graphics": graphics,
 	"!hostname": hostname,

@@ -5,6 +5,7 @@ interface EdgePositions {
 	bottom: number;
 	left: number;
 	right: number;
+	[key: string]: number;
 }
 
 function absolutePosition(element: HTMLElement): Point {

@@ -4,9 +4,9 @@ import getHash from "./util/hash";
 
 import "./main.css";
 
-async function update() {
+function update() {
 	if (document.getElementsByTagName("main").length) {
-		document.getElementsByTagName("main")[0]?.remove();
+		document.getElementsByTagName("main").item(0)?.remove();
 	}
 
 	const content = document.createElement("main");
@@ -15,9 +15,9 @@ async function update() {
 	const route = getHash();
 
 	if (!route) {
-		await mainView(content);
+		mainView(content);
 	} else {
-    await nodeView(content);
+    void nodeView(content);
   }
 }
 

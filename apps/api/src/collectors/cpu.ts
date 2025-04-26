@@ -1,14 +1,12 @@
 import Collector, { isWindows } from "./base";
 import { loadavg } from "os";
 
-class LoadAvg extends Collector {
+class LoadAvg implements Collector {
 	id = "loadavg";
 
 	constructor() {
-		super();
-
 		if (isWindows()) {
-			this.active = false;
+			this.inactive = true;
 		}
 	}
 

@@ -20,7 +20,7 @@ interface PieUpdateOptions {
 }
 
 function pieChart(options: CanvasOptions) {
-	import("./pie.css");
+	void import("./pie.css");
 
 	const canvas = createCanvas({
 		"size": options.size
@@ -39,7 +39,7 @@ function pieChart(options: CanvasOptions) {
 
 		const sectors = (() => {
 			try {
-				return JSON.parse(canvas.dataset.sectors);
+				return JSON.parse(canvas.dataset.sectors) as StyledSector[];
 			} catch {
 				console.warn(
 					"[canvas/pieChart] failed to parse JSON sectors data. Hover effects"

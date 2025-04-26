@@ -2,11 +2,11 @@ function isWindows() {
 	return process.platform === "win32";
 }
 
-class Collector {
+interface Collector {
 	id: string;
-	active = true;
-
-	getData(): unknown;
+	inactive?: true;
+	getData: () => unknown;
+	new(): this;
 }
 
 export { isWindows };

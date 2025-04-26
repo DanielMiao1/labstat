@@ -3,7 +3,7 @@
  * 
  * Each collector class should contain a unique identifier (id), and a
  * getData() function that returns any string-representable value.
- * Classes with active = false are ignored by the data aggregator.
+ * Classes with inactive = true are ignored by the data aggregator.
  * The frontend will not automatically refresh collectors whose id begins with
  * an exclamation mark.
  */
@@ -13,7 +13,7 @@ import { diskLayout, graphics, mem } from "systeminformation";
 import { networkInterfaces, uptime } from "os";
 import Collector, { isWindows } from "./base";
 
-class Memory extends Collector {
+class Memory implements Collector {
 	id = "memory";
 
 	getData() {
@@ -21,7 +21,7 @@ class Memory extends Collector {
 	}
 }
 
-class Disks extends Collector {
+class Disks implements Collector {
 	id = "!disks";
 
 	getData() {
@@ -29,7 +29,7 @@ class Disks extends Collector {
 	}
 }
 
-class Graphics extends Collector {
+class Graphics implements Collector {
 	id = "!graphics";
 
 	getData() {
@@ -37,7 +37,7 @@ class Graphics extends Collector {
 	}
 }
 
-class Network extends Collector {
+class Network implements Collector {
 	id = "!net";
 
 	getData() {
@@ -45,7 +45,7 @@ class Network extends Collector {
 	}
 }
 
-class Uptime extends Collector {
+class Uptime implements Collector {
 	id = "uptime";
 
 	getData() {
@@ -53,7 +53,7 @@ class Uptime extends Collector {
 	}
 }
 
-class Hostname extends Collector {
+class Hostname implements Collector {
 	id = "!hostname";
 
 	getData() {

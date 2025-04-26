@@ -8,9 +8,9 @@
 import json from "./os_aliases.json"
 import { padNewLine } from "../../../../util/string";
 
-const OS_ALIAS = json.aliases;
+const OS_ALIAS = json.aliases as Record<string, string>;
 
-function removeBashVariables(text) {
+function removeBashVariables(text: string): string {
 	let clean_text = "";
 	let index = 0;
 	let loop = 0;

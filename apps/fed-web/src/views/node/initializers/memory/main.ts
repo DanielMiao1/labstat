@@ -2,7 +2,7 @@ import createCollectorTitle from "../../components/title";
 import { pieChart } from "../../components/canvas/main";
 
 function initMemory() {
-	import("./memory.css");
+	void import("./memory.css");
 
 	const container = document.getElementById("collector-memory");
 	if (!container) return;

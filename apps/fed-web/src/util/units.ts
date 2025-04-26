@@ -8,7 +8,7 @@ function readableBytes(amount: number): string {
 
 	const unit = SHIFT_UNITS[shifts] ?? "NaN";
 
-	return `${readable} ${unit}`;
+	return `${readable.toString()} ${unit}`;
 }
 
 export default readableBytes;

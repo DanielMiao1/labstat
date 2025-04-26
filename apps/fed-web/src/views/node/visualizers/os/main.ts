@@ -1,13 +1,20 @@
 import assignColor from "./color";
 import getLogo from "./logo";
 
-import "./title.css";
+interface OSInfo {
+	ascii: string;
+	os: string;
+	kernel?: string;
+	version?: string;
+}
 
-function os(data: unknown) {
+function os(data: OSInfo) {
+	void import("./title.css");
+	
 	assignColor(data.os);
 
 	const logo = document.getElementById("title-logo");
-	getLogo(data.os).then(text => {
+	void getLogo(data.os).then(text => {
 		logo.innerText = text;
 	});
 

@@ -21,7 +21,7 @@ async function populateNodes(list: HTMLElement) {
 	});
 }
 
-async function mainView(content: HTMLElement) {
+function mainView(content: HTMLElement) {
 	document.body.dataset.view = "main";
 	
 	const node_list = document.createElement("div");

@@ -1,4 +1,4 @@
-import Fastify from "fastify";
+import * as Fastify from "fastify";
 import fastifyStatic from "@fastify/static";
 import fastifyWebsocket from "@fastify/websocket";
 import WebSocket from "ws";
@@ -6,29 +6,38 @@ import { join } from "path";
 
 import { getNodes, initDataFile, writeNode } from "./nodes";
 
-const server = Fastify();
+interface Collectors {
+	collectors: string[];
+}
+
+const server = Fastify.fastify();
 initDataFile();
 
 server.register(fastifyWebsocket);
-server.register(async ws_server => {
-	ws_server.get("/api/:node/data", { websocket: true }, (socket, request) => {
-		const { node } = request.params;
-		const host = `ws://${node}:17220/api/data`;
+server.register(ws_server => {
+	ws_server.get(
+		"/api/:node/data",
+		{ websocket: true }, 
+		(socket, request: Fastify.FastifyRequest<{ Params: { node: string } }>) => {
+			const { node } = request.params;
+			const host = `ws://${node}:17220/api/data`;
 
-		const node_socket = new WebSocket(host);
-		const node_ready = new Promise(resolve => {
-			node_socket.addEventListener("open", resolve);
-		});
-		
-		node_socket.addEventListener("message", message => {
-			socket.send(message.data);
-		});
+			const node_socket = new WebSocket(host);
+			const node_ready = new Promise(resolve => {
+				node_socket.addEventListener("open", resolve);
+			});
+			
+			node_socket.addEventListener("message", message => {
+				socket.send(message.data);
+			});
 
-		socket.on("message", async message => {
-			await node_ready;
-			node_socket.send(message);
-		});	
-	});
+			socket.on("message", message => {
+				void node_ready.then(() => {
+					node_socket.send(message);
+				});
+			});	
+		}
+	);
 })
 
 server.register(fastifyStatic, {
@@ -60,12 +69,15 @@ server.post("/api/register-node", {
 	reply.send("");
 });
 
-server.get("/api/:node/collectors", async (request, reply) => {
+server.get("/api/:node/collectors", async (
+	request: Fastify.FastifyRequest<{ Params: { node: string } }>,
+	reply
+) => {
 	const { node } = request.params;
 	const url = `http://${node}:17220/api/collectors`;
 
-	const request = await fetch(url);
-	const collectors = await request.json();
+	const api_request = await fetch(url);
+	const collectors = await api_request.json() as Collectors;
 
 	reply.send(collectors);
 });

@@ -13,7 +13,8 @@
 		"module": "esnext",
 		"skipLibCheck": true,
 		"skipDefaultLibCheck": true,
-		"baseUrl": "."
+		"baseUrl": ".",
+		"resolveJsonModule": true
 	},
 	"exclude": ["node_modules"]
 }
