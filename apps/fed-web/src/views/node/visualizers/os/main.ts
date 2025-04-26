@@ -10,7 +10,7 @@ interface OSInfo {
 
 function os(data: OSInfo) {
 	void import("./title.css");
-	
+
 	assignColor(data.os);
 
 	const logo = document.getElementById("title-logo");

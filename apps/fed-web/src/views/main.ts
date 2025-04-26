@@ -23,10 +23,10 @@ async function populateNodes(list: HTMLElement) {
 
 function mainView(content: HTMLElement) {
 	document.body.dataset.view = "main";
-	
+
 	const node_list = document.createElement("div");
 	content.appendChild(node_list);
-	
+
 	void populateNodes(node_list);
 }
 

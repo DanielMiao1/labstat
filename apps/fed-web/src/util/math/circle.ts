@@ -21,7 +21,7 @@ function sectorCentralAngle(sector: Sector): number {
 
 	if (sectorCrossesZero(sector)) {
 		const first = 2 * Math.PI - sector.start;
-		const end = sector.end;
+		const { end } = sector;
 
 		return first + end;
 	}
@@ -33,7 +33,7 @@ function pointInSector(point: Point, circle: Circle, sector: Sector) {
 	/**
 	 * Check if a point is within a sector. Expects radians for sector start/end
 	 * measurements.
-	 * 
+	 *
 	 * The point is within the sector if the point's polar angle is within the
 	 * bounding angles of the sector, and if the point's polar radius is less than
 	 * the circle's radius.
@@ -41,7 +41,7 @@ function pointInSector(point: Point, circle: Circle, sector: Sector) {
 
 	const relative = pointDifference(point, circle.origin);
 	const point_angle = normalizeAngle(Math.atan2(relative.y, relative.x));
-	
+
 	// Check whether the sector crosses the zero-degree angle
 	if (sectorCrossesZero(sector)) {
 		if (point_angle > sector.end && point_angle < sector.start) {

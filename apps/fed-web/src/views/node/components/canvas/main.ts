@@ -1,5 +1,5 @@
 interface CanvasOptions {
-	size: number
+	size: number;
 }
 
 function createCanvas(options: CanvasOptions): HTMLCanvasElement {
@@ -9,7 +9,7 @@ function createCanvas(options: CanvasOptions): HTMLCanvasElement {
 	canvas.style.height = options.size.toString() + "px";
 	canvas.width = options.size * 2;
 	canvas.height = options.size * 2;
-	
+
 	return canvas;
 }
 

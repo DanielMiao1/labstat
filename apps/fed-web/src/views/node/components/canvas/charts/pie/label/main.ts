@@ -15,7 +15,7 @@ import {
 interface Area {
 	/**
 	 * The area in which to auto-place the chart label.
-	 * 
+	 *
 	 * Area.avoid is an array of integers that represent disallowed corners of
 	 * the container element:
 	 *   0 = top-left
@@ -57,7 +57,7 @@ function styleLabel(
 	/**
 	 * Update the label style and select a position according to restrictions in
 	 * area object.
-	 * 
+	 *
 	 * The label will be placed in one of the corners of the
 	 * area.allowed DOM element, whichever is closest to the selected sector and
 	 * is not disallowed by area.avoid.

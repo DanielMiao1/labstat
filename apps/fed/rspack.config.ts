@@ -2,7 +2,7 @@ import { resolve } from "path";
 
 export default {
 	entry: {
-		main: "./apps/fed/src/main.ts",
+		main: "./apps/fed/src/main.ts"
 	},
 	externalsType: "commonjs",
 	module: {
@@ -18,7 +18,7 @@ export default {
 								decorators: true,
 								syntax: "typescript"
 							}
-						},
+						}
 					}
 				}
 			}

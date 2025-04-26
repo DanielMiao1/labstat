@@ -10,7 +10,7 @@ function initOS() {
 	logo.classList.add("title-logo", "p-small", "monospace");
 
 	const title = document.createElement("div");
-	title.classList.add("page-title")
+	title.classList.add("page-title");
 	container.appendChild(title);
 
 	const title_text = document.createElement("p");

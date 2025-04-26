@@ -2,7 +2,7 @@ import { resolve } from "path";
 
 export default {
 	entry: {
-		main: "./apps/api/src/main.ts",
+		main: "./apps/api/src/main.ts"
 	},
 	externalsType: "commonjs",
 	module: {

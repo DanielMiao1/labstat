@@ -23,7 +23,7 @@ function pieChart(options: CanvasOptions) {
 	void import("./pie.css");
 
 	const canvas = createCanvas({
-		"size": options.size
+		size: options.size
 	});
 
 	const midpoint = Math.floor(options.size / 2);
@@ -57,7 +57,7 @@ function pieChart(options: CanvasOptions) {
 			},
 			radius: midpoint - 10
 		};
-		
+
 		sectors.some((sector: StyledSector) => {
 			const included = pointInSector({ x, y }, circle, sector);
 
@@ -84,9 +84,9 @@ function pieUpdate(canvas: HTMLCanvasElement, options: PieUpdateOptions) {
 
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-	const values = options.values;
+	const { values } = options;
 	const sum = Object.values(values).reduce((partial, n) => partial + n, 0);
-	const sorted_keys = Object.keys(values).sort((a, b) => values[a] - values[b])
+	const sorted_keys = Object.keys(values).sort((a, b) => values[a] - values[b]);
 	const midpoint = Math.floor(size / 2);
 
 	let current_angle = -Math.PI / 2;
@@ -101,7 +101,7 @@ function pieUpdate(canvas: HTMLCanvasElement, options: PieUpdateOptions) {
 		const end_angle = current_angle + delta;
 
 		const color = options.colors[key];
-		
+
 		ctx.fillStyle = color;
 		ctx.beginPath();
 		ctx.moveTo(midpoint, midpoint);

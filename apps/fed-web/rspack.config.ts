@@ -22,7 +22,7 @@ export default {
 								decorators: true,
 								syntax: "typescript"
 							}
-						},
+						}
 					}
 				}
 			},
@@ -32,12 +32,12 @@ export default {
 					{
 						loader: "builtin:lightningcss-loader",
 						options: {
-							targets: ">0.4%",
-						},
-					},
+							targets: ">0.4%"
+						}
+					}
 				],
 				type: "css/auto"
-			},
+			}
 		]
 	},
 	plugins: [

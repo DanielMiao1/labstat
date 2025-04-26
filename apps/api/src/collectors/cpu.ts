@@ -1,4 +1,5 @@
-import Collector, { isWindows } from "./base";
+import type Collector from "./base";
+import { isWindows } from "./os";
 import { loadavg } from "os";
 
 class LoadAvg implements Collector {

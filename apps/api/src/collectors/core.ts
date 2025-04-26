@@ -1,6 +1,6 @@
 /**
  * Core collectors - should work in all environments
- * 
+ *
  * Each collector class should contain a unique identifier (id), and a
  * getData() function that returns any string-representable value.
  * Classes with inactive = true are ignored by the data aggregator.
@@ -8,10 +8,11 @@
  * an exclamation mark.
  */
 
+import type Collector from "./base";
 import { execSync } from "child_process";
 import { diskLayout, graphics, mem } from "systeminformation";
+import { isWindows } from "./os";
 import { networkInterfaces, uptime } from "os";
-import Collector, { isWindows } from "./base";
 
 class Memory implements Collector {
 	id = "memory";
@@ -60,7 +61,7 @@ class Hostname implements Collector {
 		const command = isWindows() ? "hostname" : "uname -n";
 		const hostname = execSync(command).toString().slice(0, -1);
 
-		return { hostname }; 
+		return { hostname };
 	}
 }
 

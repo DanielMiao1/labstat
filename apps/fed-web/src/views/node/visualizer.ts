@@ -16,7 +16,7 @@ const handlers: Record<string, handler | null> = {
 	memory,
 	"!net": net,
 	"!os": os
-}
+};
 
 function showData(id: string, data: string) {
 	const handler = handlers[id];

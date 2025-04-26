@@ -3,7 +3,7 @@ interface RowOptions {
 	tooltip?: string;
 }
 
-type list_options = RowOptions[]
+type list_options = RowOptions[];
 
 function createList(container: HTMLElement, data: list_options) {
 	const table = document.createElement("table");

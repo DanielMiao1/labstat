@@ -14,13 +14,13 @@ server.register(ws_server => {
 			void getData(id).then(data => {
 				socket.send(`${id} ${data}`);
 			});
-		})
+		});
 	});
 });
 
-server.get("/api/collectors", (_ , reply) => {
+server.get("/api/collectors", (_, reply) => {
 	reply.send({
-		"collectors": activeCollectors()
+		collectors: activeCollectors()
 	});
 });
 

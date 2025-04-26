@@ -7,15 +7,15 @@ type graphics_info = Awaited<ReturnType<typeof graphicsData>>;
 function graphics(data: graphics_info) {
 	const container = document.getElementById("collector-!graphics");
 	if (!container) return;
-	
+
 	createCollectorTitle(container, "Graphics");
 
 	const table_data = [{
-		"items": ["Vendor", "Model", "Bus", "VRAM"]
+		items: ["Vendor", "Model", "Bus", "VRAM"]
 	}];
 
-	const controllers = data.controllers;
-	
+	const { controllers } = data;
+
 	controllers.forEach(controller => {
 		const vendor = (() => {
 			if (controller.subVendor) {
@@ -44,7 +44,7 @@ function graphics(data: graphics_info) {
 		})();
 
 		table_data.push({
-			"items": [vendor, controller.model, bus, vram]
+			items: [vendor, controller.model, bus, vram]
 		});
 	});
 

@@ -1,7 +1,3 @@
-function isWindows() {
-	return process.platform === "win32";
-}
-
 interface Collector {
 	id: string;
 	inactive?: true;
@@ -9,5 +5,4 @@ interface Collector {
 	new(): this;
 }
 
-export { isWindows };
 export default Collector;

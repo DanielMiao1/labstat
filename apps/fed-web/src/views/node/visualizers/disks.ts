@@ -9,7 +9,7 @@ type disk_info = Awaited<ReturnType<typeof diskData>>;
 function disks(data: disk_info) {
 	const container = document.getElementById("collector-!disks");
 	if (!container) return;
-	
+
 	createCollectorTitle(container, "Disks");
 
 	const table_data = [{

@@ -17,7 +17,7 @@ server.register(fastifyWebsocket);
 server.register(ws_server => {
 	ws_server.get(
 		"/api/:node/data",
-		{ websocket: true }, 
+		{ websocket: true },
 		(socket, request: Fastify.FastifyRequest<{ Params: { node: string } }>) => {
 			const { node } = request.params;
 			const host = `ws://${node}:17220/api/data`;
@@ -26,7 +26,7 @@ server.register(ws_server => {
 			const node_ready = new Promise(resolve => {
 				node_socket.addEventListener("open", resolve);
 			});
-			
+
 			node_socket.addEventListener("message", message => {
 				socket.send(message.data);
 			});
@@ -35,10 +35,10 @@ server.register(ws_server => {
 				void node_ready.then(() => {
 					node_socket.send(message);
 				});
-			});	
+			});
 		}
 	);
-})
+});
 
 server.register(fastifyStatic, {
 	prefix: "/",
@@ -47,7 +47,7 @@ server.register(fastifyStatic, {
 
 server.get("/api/nodes", (_, reply) => {
 	reply.send(getNodes());
-})
+});
 
 server.post("/api/register-node", {
 	schema: {
@@ -63,7 +63,7 @@ server.post("/api/register-node", {
 		}
 	}
 }, (request, reply) => {
-	const ip = request.ip;
+	const { ip } = request;
 
 	writeNode(ip, request.body);
 	reply.send("");

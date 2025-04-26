@@ -1,11 +1,11 @@
 import type { Point } from "./math/geometry";
 
 interface EdgePositions {
+	[key: string]: number;
 	top: number;
 	bottom: number;
 	left: number;
 	right: number;
-	[key: string]: number;
 }
 
 function absolutePosition(element: HTMLElement): Point {
@@ -14,7 +14,7 @@ function absolutePosition(element: HTMLElement): Point {
 	return {
 		x: element_rect.x + window.scrollX,
 		y: element_rect.y + window.scrollY
-	}
+	};
 }
 
 function edgePositions(element: HTMLElement): EdgePositions {

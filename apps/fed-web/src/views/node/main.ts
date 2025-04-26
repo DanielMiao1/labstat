@@ -13,7 +13,9 @@ interface Collectors {
 let socket: WebSocket;
 const collectors: string[] = [];
 
-const INIT_COLLECTORS = ["!os", "loadavg", "memory", "!disks", "!net", "!graphics"];
+const INIT_COLLECTORS = [
+	"!os", "loadavg", "memory", "!disks", "!net", "!graphics"
+];
 
 function createContainer(id: string, parent: HTMLElement) {
 	const container = document.createElement("div");
@@ -35,9 +37,9 @@ async function initializeSocket(node: string) {
 	socket = new WebSocket(url);
 
 	socket.addEventListener("message", (message: { data?: string }) => {
-		const data = message.data;
+		const { data } = message;
 		if (!data) return;
-		
+
 		const separator = data.indexOf(" ");
 
 		const id = data.slice(0, separator);
@@ -58,15 +60,14 @@ function refreshData(ids?: string[]) {
 }
 
 async function nodeView(content: HTMLElement) {
-	
 	document.body.dataset.view = "node";
-	
+
 	const node = getHash();
 	const all_collectors = await getCollectors(node);
 
 	await initializeSocket(node);
 	refreshData(all_collectors);
-	
+
 	INIT_COLLECTORS.forEach(init_collector => {
 		all_collectors.some(collector => {
 			if (init_collector === collector) {

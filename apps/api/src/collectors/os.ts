@@ -1,4 +1,4 @@
-import Collector from "./base";
+import type Collector from "./base";
 import figlet from "figlet";
 import slant from "figlet/importable-fonts/Slant.js";
 import { stripAllQuotes } from "../util/string";
@@ -9,13 +9,13 @@ import { execSync } from "child_process";
 figlet.parseFont("Slant", slant);
 
 const PROCESS_PLATFORMS: Record<NodeJS.Platform, string> = {
-	"aix": "AIX",
-	"andriod": "Andriod",
-	"darwin": "macOS",
-	"freebsd": "FreeBSD",
-	"openbsd": "OpenBSD",
-	"win32": "Windows",
-}
+	aix: "AIX",
+	andriod: "Andriod",
+	darwin: "macOS",
+	freebsd: "FreeBSD",
+	openbsd: "OpenBSD",
+	win32: "Windows"
+};
 
 interface OSInfo {
 	os: string;
@@ -36,11 +36,11 @@ function generateAscii(text: string): Promise<string> {
 }
 
 function identifyOS(): OSInfo {
-	const platform = process.platform;
+	const { platform } = process;
 	const name = PROCESS_PLATFORMS[platform];
 
 	if (name) return { os: name };
-	if (platform !== "linux") return { os: "unknown" }
+	if (platform !== "linux") return { os: "unknown" };
 
 	const kernel = execSync("uname -r").toString().slice(0, -1);
 
@@ -48,32 +48,36 @@ function identifyOS(): OSInfo {
 		const release = readFileSync("/etc/os-release").toString();
 		const lines = release.split("\n");
 
-		let name: string;
+		let os_name: string;
 		let version: string;
 
 		lines.some(line => {
 			if (line.startsWith("NAME=")) {
-				const text = line.slice(5)
-				name = stripAllQuotes(text);
+				const text = line.slice(5);
+				os_name = stripAllQuotes(text);
 			} else if (line.startsWith("VERSION_ID=")) {
 				const text = line.slice(11);
 				version = stripAllQuotes(text);
 			}
 
-			return name && version;
+			return os_name && version;
 		});
 
-		if (name) return {
-			os: name,
+		if (os_name) return {
+			os: os_name,
 			kernel,
 			version
-		}
+		};
 	}
 
 	return {
 		os: "Linux",
 		kernel
-	}
+	};
+}
+
+function isWindows() {
+	return process.platform === "win32";
 }
 
 class OS implements Collector {
@@ -83,8 +87,9 @@ class OS implements Collector {
 		const data = identifyOS();
 		const ascii = await generateAscii(data.os);
 
-		return {...data, ascii};
+		return { ...data, ascii };
 	}
 }
 
 export default OS;
+export { isWindows };

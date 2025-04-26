@@ -1,6 +1,6 @@
 interface NodeOptions {
-  hostname: string;
 	[key: string]: string;
+	hostname: string;
 }
 
 async function getNodes(): Promise<NodeOptions> {

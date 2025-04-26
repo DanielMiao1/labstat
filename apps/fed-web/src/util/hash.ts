@@ -1,10 +1,10 @@
 function getHash() {
-  const hash = document.location.hash;
-  if (hash.startsWith("#")) {
-    return hash.slice(1);
-  }
+	const { hash } = document.location;
+	if (hash.startsWith("#")) {
+		return hash.slice(1);
+	}
 
-  return hash;
+	return hash;
 }
 
 export default getHash;

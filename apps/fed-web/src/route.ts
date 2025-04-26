@@ -17,8 +17,8 @@ function update() {
 	if (!route) {
 		mainView(content);
 	} else {
-    void nodeView(content);
-  }
+		void nodeView(content);
+	}
 }
 
 update();

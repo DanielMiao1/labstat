@@ -10,20 +10,20 @@ interface Properties {
 const CORNERS = [
 	{
 		x: "left",
-		y: "top",
+		y: "top"
 	},
 	{
 		x: "right",
-		y: "top",
+		y: "top"
 	},
 	{
 		x: "left",
-		y: "bottom",
+		y: "bottom"
 	},
 	{
 		x: "right",
-		y: "bottom",
-	},
+		y: "bottom"
+	}
 ];
 
 function cornerDistance(
@@ -44,7 +44,7 @@ function cornerDistance(
 
 function chooseCorner(area: Area, tail_pos: Point): Properties {
 	let min_distance = Number.POSITIVE_INFINITY;
-	let corner = CORNERS[3];
+	let { 3: corner } = CORNERS;
 
 	CORNERS.forEach((properties, index) => {
 		if (area.avoid?.includes(index)) return;
