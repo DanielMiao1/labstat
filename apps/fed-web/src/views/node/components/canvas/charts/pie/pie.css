@@ -13,5 +13,10 @@
 
 	svg {
 		position: absolute;
+		display: none;
+
+		* {
+			stroke: var(--sector-color);
+		}
 	}
 }

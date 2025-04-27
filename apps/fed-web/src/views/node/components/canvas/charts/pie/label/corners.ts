@@ -1,62 +1,39 @@
-import { edgePositions } from "../../../../../../../util/dom";
+import { distance, type Point } from "../../../../../../../util/math/geometry";
+import { edgePositions, type Corner } from "../../../../../../../util/dom";
+import json from "./corners.json";
 import type { Area } from "./main";
-import type { Point } from "../../../../../../../util/math/geometry";
 
-interface Properties {
-	x: string;
-	y: string;
-}
-
-const CORNERS = [
-	{
-		x: "left",
-		y: "top"
-	},
-	{
-		x: "right",
-		y: "top"
-	},
-	{
-		x: "left",
-		y: "bottom"
-	},
-	{
-		x: "right",
-		y: "bottom"
-	}
-];
+const CORNERS = json.corners;
 
 function cornerDistance(
 	container: HTMLElement,
-	properties: Properties,
+	corner_edges: Corner,
 	tail_pos: Point
 ): number {
 	const edges = edgePositions(container);
-	const x = edges[properties.x];
-	const y = edges[properties.y];
+	const x = edges[corner_edges.x];
+	const y = edges[corner_edges.y];
 
-	const dx = Math.abs(x - tail_pos.x);
-	const dy = Math.abs(y - tail_pos.y);
-
-	const distance = Math.sqrt(dx ** 2 + dy ** 2);
-	return distance;
+	const dist = distance({ x, y }, tail_pos);
+	return dist;
 }
 
-function chooseCorner(area: Area, tail_pos: Point): Properties {
+function chooseCorner(area: Area, tail_pos: Point): Corner {
 	let min_distance = Number.POSITIVE_INFINITY;
-	let { 3: corner } = CORNERS;
-
-	CORNERS.forEach((properties, index) => {
+	let corner = 3;
+	
+	CORNERS.forEach((data, index) => {
 		if (area.avoid?.includes(index)) return;
 
-		const distance = cornerDistance(area.container, properties, tail_pos);
+		const distance = cornerDistance(area.container, data.edges, tail_pos);
 		if (distance < min_distance) {
 			min_distance = distance;
-			corner = properties;
+			corner = index;
 		}
 	});
 
-	return corner;
+	return CORNERS[corner];
 }
 
 export default chooseCorner;
+export type { Properties };

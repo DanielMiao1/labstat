@@ -1,4 +1,4 @@
-import type { Point } from "./math/geometry";
+import { pointSum, type Point } from "./math/geometry";
 
 interface EdgePositions {
 	[key: string]: number;
@@ -8,6 +8,25 @@ interface EdgePositions {
 	right: number;
 }
 
+interface Corner {
+	x: string;
+	y: string;
+}
+
+const OPPOSITE_CORNERS = {
+	"top": "bottom",
+	"bottom": "top",
+	"left": "right",
+	"right": "left"
+};
+
+function oppositeCorner(corner: Corner): Corner {
+	return {
+		x: OPPOSITE_CORNERS[corner.x],
+		y: OPPOSITE_CORNERS[corner.y]
+	};
+}
+
 function absolutePosition(element: HTMLElement): Point {
 	const element_rect = element.getBoundingClientRect();
 
@@ -15,6 +34,12 @@ function absolutePosition(element: HTMLElement): Point {
 		x: element_rect.x + window.scrollX,
 		y: element_rect.y + window.scrollY
 	};
+}
+
+function absoluteFromContext(point: Point, context: HTMLElement): Point {
+	const context_pos = absolutePosition(context);
+
+	return pointSum(point, context_pos);
 }
 
 function edgePositions(element: HTMLElement): EdgePositions {
@@ -29,4 +54,5 @@ function edgePositions(element: HTMLElement): EdgePositions {
 	};
 }
 
-export { absolutePosition, edgePositions };
+export { absoluteFromContext, absolutePosition, edgePositions, oppositeCorner };
+export type { Corner };

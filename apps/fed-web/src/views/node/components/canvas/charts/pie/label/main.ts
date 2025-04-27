@@ -1,9 +1,15 @@
-import { absolutePosition } from "../../../../../../../util/dom";
 import chooseCorner from "./corners";
 import createLine from "./line";
+import json from "./corners.json";
 import { showLabel } from "../../label";
 import type { Point } from "../../../../../../../util/math/geometry";
 import type { StyledSector } from "../pie";
+
+import {
+	absoluteFromContext,
+	absolutePosition,
+	oppositeCorner
+} from "../../../../../../../util/dom";
 
 import {
 	pointOnCircle,
@@ -11,6 +17,8 @@ import {
 	type Circle,
 	type Sector
 } from "../../../../../../../util/math/circle";
+
+const CORNERS = json.corners;
 
 interface Area {
 	/**
@@ -28,24 +36,16 @@ interface Area {
 	container: HTMLElement;
 }
 
-const EDGES = new Set(["top", "bottom", "left", "right"]);
-
 function tailPosition(
 	canvas: HTMLCanvasElement,
 	circle: Circle,
 	sector: Sector
 ): Point {
 	const sector_bisector = sectorBisector(sector);
-	const { x, y } = pointOnCircle(circle, sector_bisector);
-
-	const canvas_position = absolutePosition(canvas);
-	const absolute_x = x + canvas_position.x;
-	const absolute_y = y + canvas_position.y;
-
-	return {
-		x: absolute_x,
-		y: absolute_y
-	};
+	const pos = pointOnCircle(circle, sector_bisector);
+	
+	const absolute_pos = absoluteFromContext(pos, canvas);
+	return absolute_pos;
 }
 
 function styleLabel(
@@ -70,16 +70,18 @@ function styleLabel(
 	text_element.innerText = sector.name;
 
 	const tail_pos = tailPosition(canvas, circle, sector);
-	const { x, y } = chooseCorner(area, tail_pos);
 
-	EDGES.forEach(className => {
-		if (![x, y].includes(className)) label.style[className] = "unset";
-	});
+	const corner = chooseCorner(area, tail_pos);
+	const { x, y } = corner.edges;
+
+	const { x: opp_x, y: opp_y } = oppositeCorner({ x, y });
+	label.style[opp_x] = "unset";
+	label.style[opp_y] = "unset";
 
 	label.style[x] = "20px";
 	label.style[y] = "20px";
 
-	createLine(label);
+	createLine(canvas, label, corner, circle, sector);
 }
 
 export default styleLabel;
