@@ -13,11 +13,11 @@ interface Corner {
 	y: string;
 }
 
-const OPPOSITE_CORNERS = {
-	"top": "bottom",
-	"bottom": "top",
-	"left": "right",
-	"right": "left"
+const OPPOSITE_CORNERS: Record<string, string> = {
+	top: "bottom",
+	bottom: "top",
+	left: "right",
+	right: "left"
 };
 
 function oppositeCorner(corner: Corner): Corner {

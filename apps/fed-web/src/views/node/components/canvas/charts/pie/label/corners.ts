@@ -21,13 +21,13 @@ function cornerDistance(
 function chooseCorner(area: Area, tail_pos: Point): Corner {
 	let min_distance = Number.POSITIVE_INFINITY;
 	let corner = 3;
-	
+
 	CORNERS.forEach((data, index) => {
 		if (area.avoid?.includes(index)) return;
 
-		const distance = cornerDistance(area.container, data.edges, tail_pos);
-		if (distance < min_distance) {
-			min_distance = distance;
+		const dist = cornerDistance(area.container, data, tail_pos);
+		if (dist < min_distance) {
+			min_distance = dist;
 			corner = index;
 		}
 	});
@@ -36,4 +36,3 @@ function chooseCorner(area: Area, tail_pos: Point): Corner {
 }
 
 export default chooseCorner;
-export type { Properties };

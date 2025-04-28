@@ -28,7 +28,7 @@ function pieChart(options: CanvasOptions) {
 
 	const midpoint = Math.floor(options.size / 2);
 
-	canvas.addEventListener("mouseleave", event => {
+	canvas.addEventListener("mouseleave", () => {
 		hideLabel(canvas.parentNode);
 	});
 

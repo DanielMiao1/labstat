@@ -1,13 +1,11 @@
 import chooseCorner from "./corners";
 import createLine from "./line";
-import json from "./corners.json";
 import { showLabel } from "../../label";
 import type { Point } from "../../../../../../../util/math/geometry";
 import type { StyledSector } from "../pie";
 
 import {
 	absoluteFromContext,
-	absolutePosition,
 	oppositeCorner
 } from "../../../../../../../util/dom";
 
@@ -17,8 +15,6 @@ import {
 	type Circle,
 	type Sector
 } from "../../../../../../../util/math/circle";
-
-const CORNERS = json.corners;
 
 interface Area {
 	/**
@@ -43,7 +39,7 @@ function tailPosition(
 ): Point {
 	const sector_bisector = sectorBisector(sector);
 	const pos = pointOnCircle(circle, sector_bisector);
-	
+
 	const absolute_pos = absoluteFromContext(pos, canvas);
 	return absolute_pos;
 }
@@ -72,7 +68,7 @@ function styleLabel(
 	const tail_pos = tailPosition(canvas, circle, sector);
 
 	const corner = chooseCorner(area, tail_pos);
-	const { x, y } = corner.edges;
+	const { x, y } = corner;
 
 	const { x: opp_x, y: opp_y } = oppositeCorner({ x, y });
 	label.style[opp_x] = "unset";

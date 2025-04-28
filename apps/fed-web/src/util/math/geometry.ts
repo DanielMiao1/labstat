@@ -28,8 +28,8 @@ function distance(a: Point, b: Point): number {
 	const dx = Math.abs(a.x - b.x);
 	const dy = Math.abs(a.y - b.y);
 
-	const distance = Math.sqrt(dx ** 2 + dy ** 2);
-	return distance;
+	const dist = Math.sqrt(dx ** 2 + dy ** 2);
+	return dist;
 }
 
 export { distance, normalizeAngle, pointDifference, pointSum };

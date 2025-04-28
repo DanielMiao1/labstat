@@ -1,32 +1,20 @@
 {
 	"corners": [
 		{
-			"edges": {
-				"x": "left",
-				"y": "top"
-			},
-			"angle": 4.084070449666731
+			"x": "left",
+			"y": "top"
 		},
 		{
-			"edges": {
-				"x": "right",
-				"y": "top"
-			},
-			"angle": 2.199114857512855
+			"x": "right",
+			"y": "top"
 		},
 		{
-			"edges": {
-				"x": "left",
-				"y": "bottom"
-			},
-			"angle": 8.482300164692441
+			"x": "left",
+			"y": "bottom"
 		},
 		{
-			"edges": {
-				"x": "right",
-				"y": "bottom"
-			},
-			"angle": 10.367255756846317
+			"x": "right",
+			"y": "bottom"
 		}
 	]
 }
