@@ -7,12 +7,12 @@ function parseRgba(html_string: string): rgba_color {
 	return values.map(value => stripFirstLast(value, " "));
 }
 
-function parseRgb(html_string: string): rgba_clor {
+function parseRgb(html_string: string): rgba_color {
 	return [...parseRgba(`x${html_string}`), 1];
 }
 
 function parseHex(html_string: string): rgba_color {
-	const length = html_string.length;
+	const { length } = html_string;
 	const values: string[] = [];
 
 	if (3 < length && length < 6) {
@@ -36,23 +36,6 @@ function parseHex(html_string: string): rgba_color {
 class Color {
 	private values: rgba_color;
 
-	lumaLightness(): number {
-		/**
-		 * Calculates the lightness using the Y' values for Adobe RGB, which
-		 * provides a good approximation for the perceived lightness biases for
-		 * most common color spaces.
-		 * 
-		 * The applicable gamma correction is applied to each color value, then
-		 * the resulting average is returned.
-		 */
-
-		const r = 0.212 * this.values[0];
-		const g = 0.701 * this.values[1];
-		const b = 0.087 * this.values[2];
-
-		return r + g + b;
-	}
-
 	constructor(html_string: string) {
 		if (html_string.startsWith("rgba")) {
 			this.values = parseRgba(html_string);
@@ -63,6 +46,23 @@ class Color {
 		} else {
 			this.values = [0, 0, 0, 0];
 		}
+	}
+
+	lumaLightness(): number {
+		/**
+		 * Calculates the lightness using the Y' values for Adobe RGB, which
+		 * provides a good approximation for the perceived lightness biases for
+		 * most common color spaces.
+		 *
+		 * The applicable gamma correction is applied to each color value, then
+		 * the resulting average is returned.
+		 */
+
+		const r = 0.212 * this.values[0];
+		const g = 0.701 * this.values[1];
+		const b = 0.087 * this.values[2];
+
+		return r + g + b;
 	}
 }
 

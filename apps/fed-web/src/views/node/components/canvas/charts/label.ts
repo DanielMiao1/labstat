@@ -1,7 +1,7 @@
 import type { Point } from "../../../../../util/math/geometry";
 
 function showLabel(position: Point): HTMLParagraphElement {
-	import("./label.css");
+	void import("./label.css");
 
 	const label = (() => {
 		let element = document.getElementById("chart-label");
@@ -22,8 +22,8 @@ function showLabel(position: Point): HTMLParagraphElement {
 	const x_offset = position.x - width - 10;
 	const y_offset = position.y - height - 10;
 
-	label.style.top = y_offset + "px";
-	label.style.left = x_offset + "px";
+	label.style.top = y_offset.toString() + "px";
+	label.style.left = x_offset.toString() + "px";
 
 	return label;
 }
