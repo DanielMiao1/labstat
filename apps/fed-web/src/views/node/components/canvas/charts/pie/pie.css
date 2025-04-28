@@ -2,20 +2,11 @@
 	position: relative;
 }
 
-.piechart-label {
-	color: var(--sector-color);
-	display: none;
-	position: absolute;
-
-	&.active {
-		display: block;
-	}
-
-	svg {
-		position: absolute;
-
-		* {
-			stroke: var(--sector-color);
-		}
-	}
+.chart-label::before {
+	background-color: var(--label-fg);
+	content: "";
+	display: inline-block;
+	height: 11px;
+	margin: 0 5px 0 2px;
+	width: 11px;
 }

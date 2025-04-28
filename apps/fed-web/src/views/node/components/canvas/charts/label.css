@@ -1,0 +1,18 @@
+.chart-label {
+	backdrop-filter: blur(16px);
+	background-color: #0006;
+	border-radius: 6px;
+	color: white;
+	display: none;
+	padding: 0.55em;
+	position: absolute;
+
+	&.active {
+		display: block;
+	}
+
+	&.light {
+		background-color: #fff8;
+		color: black;
+	}
+}

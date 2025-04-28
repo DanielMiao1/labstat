@@ -1,7 +1,8 @@
+import { absoluteWithOverflow } from "../../../../../../util/dom";
 import createCanvas, { type CanvasOptions } from "../../main";
-import { hideLabel } from "../label";
+import Color from "../../../../../../util/color";
+import { hideLabel, showLabel } from "../label";
 import { normalizeAngle } from "../../../../../../util/math/geometry";
-import styleLabel from "./label/main";
 
 import {
 	pointInSector,
@@ -19,6 +20,21 @@ interface PieUpdateOptions {
 	values: Record<string, number>;
 }
 
+function styleLabel(label: HTMLParagraphElement, sector: StyledSector) {
+	label.innerText = sector.name;
+	label.style.setProperty("--label-fg", sector.color);
+
+	// If the sector color is too dark, make the label background lighter.
+	const sector_color = new Color(sector.color);
+	const lightness = sector_color.lumaLightness();
+
+	if (lightness < 127) {
+		label.classList.add("light");
+	} else {
+		label.classList.remove("light");
+	}
+}
+
 function pieChart(options: CanvasOptions) {
 	void import("./pie.css");
 
@@ -29,7 +45,7 @@ function pieChart(options: CanvasOptions) {
 	const midpoint = Math.floor(options.size / 2);
 
 	canvas.addEventListener("mouseleave", () => {
-		hideLabel(canvas.parentNode);
+		hideLabel();
 	});
 
 	canvas.addEventListener("mousemove", event => {
@@ -62,14 +78,15 @@ function pieChart(options: CanvasOptions) {
 			const included = pointInSector({ x, y }, circle, sector);
 
 			if (included) {
-				styleLabel({
-					avoid: [0],
-					container: canvas.parentNode
-				}, canvas, circle, sector);
+				const mouse_pos = { x: event.x, y: event.y };
+				const absolute_pos = absoluteWithOverflow(mouse_pos);
+
+				const label = showLabel(absolute_pos);
+				styleLabel(label, sector);
 
 				return true;
 			}
-		}) || hideLabel(canvas.parentNode); // Hide label if no setor is found
+		}) || hideLabel(); // Hide label if no setor is found
 	});
 
 	return canvas;
