@@ -1,7 +1,7 @@
 import { absoluteWithOverflow } from "../../../../../../util/dom";
 import createCanvas, { type CanvasOptions } from "../../main";
 import Color from "../../../../../../util/color";
-import { hideLabel, showLabel } from "../label";
+import { hideLabel, moveLabel, showLabel } from "../label";
 import { normalizeAngle } from "../../../../../../util/math/geometry";
 
 import {
@@ -17,6 +17,7 @@ interface StyledSector extends Sector {
 
 interface PieUpdateOptions {
 	colors: Record<string, string>;
+	total_callback?: (total: number) => string; // Callback to format total amount
 	values: Record<string, number>;
 }
 
@@ -41,6 +42,13 @@ function pieChart(options: CanvasOptions) {
 	const canvas = createCanvas({
 		size: options.size
 	});
+
+	const ctx = canvas.getContext("2d");
+
+	ctx.font = "bold 80px sans-serif";
+	ctx.shadowColor = "black";
+	ctx.textAlign = "center";
+	ctx.textBaseline = "middle";
 
 	const midpoint = Math.floor(options.size / 2);
 
@@ -81,8 +89,9 @@ function pieChart(options: CanvasOptions) {
 				const mouse_pos = { x: event.x, y: event.y };
 				const absolute_pos = absoluteWithOverflow(mouse_pos);
 
-				const label = showLabel(absolute_pos);
+				const label = showLabel();
 				styleLabel(label, sector);
+				moveLabel(label, absolute_pos);
 
 				return true;
 			}
@@ -120,6 +129,7 @@ function pieUpdate(canvas: HTMLCanvasElement, options: PieUpdateOptions) {
 		const color = options.colors[key];
 
 		ctx.fillStyle = color;
+		ctx.shadowBlur = 0;
 		ctx.beginPath();
 		ctx.moveTo(midpoint, midpoint);
 		ctx.arc(midpoint, midpoint, midpoint - 10, current_angle, end_angle);
@@ -136,6 +146,13 @@ function pieUpdate(canvas: HTMLCanvasElement, options: PieUpdateOptions) {
 
 		current_angle = end_angle;
 	});
+
+	if (options.total_callback) {
+		ctx.fillStyle = "white";
+		ctx.shadowBlur = 80;
+
+		ctx.fillText(options.total_callback(sum), midpoint, midpoint);
+	}
 
 	canvas.dataset.sectors = JSON.stringify(sectors);
 }

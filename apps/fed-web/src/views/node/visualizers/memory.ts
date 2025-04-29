@@ -1,26 +1,23 @@
 import { pieUpdate } from "../components/canvas/main";
+import { readableBytes } from "../../../util/units";
 
-const PIE_COLORS = {
-	total: "#aaaaaa",
-	free: "#f00",
-	used: "#00f",
-	active: "#f0f",
-	available: "#ff0",
-	buffers: "#0ff",
-	cached: "#555",
-	slab: "#0f0",
-	buffcache: "#006",
-	swaptotal: "#800",
-	swapused: "#070",
-	swapfree: "#880",
-	dirty: "#08a"
-};
+const COLORS = {
+	"Free": "#6d8",
+	"Free Swap": "#273",
+	"Used Swap": "#444"
+}
+
+function formatTotal(total: number): string {
+	const readable = readableBytes(total, 1);
+	return readable;
+}
 
 function memory(data: unknown) {
 	const canvas = document.getElementById("memory-canvas");
 
 	pieUpdate(canvas, {
-		colors: PIE_COLORS,
+		colors: COLORS,
+		total_callback: formatTotal,
 		values: data
 	});
 }

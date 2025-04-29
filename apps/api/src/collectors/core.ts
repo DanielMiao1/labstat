@@ -17,8 +17,13 @@ import { networkInterfaces, uptime } from "os";
 class Memory implements Collector {
 	id = "memory";
 
-	getData() {
-		return mem();
+	async getData() {
+		const data = await mem();
+		return {
+			"Free": data.free,
+			"Used Swap": data.swapused,
+			"Free Swap": data.swapfree
+		}
 	}
 }
 

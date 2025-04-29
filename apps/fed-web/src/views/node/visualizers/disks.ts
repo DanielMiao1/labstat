@@ -1,6 +1,6 @@
 import createCollectorTitle from "../components/title";
 import createList from "../components/list";
-import readableBytes from "../../../util/units";
+import { readableBytes } from "../../../util/units";
 import { truncate } from "../../../util/string";
 import type { diskLayout as diskData } from "systeminformation";
 

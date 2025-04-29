@@ -17,6 +17,10 @@ function showLabel(position: Point): HTMLParagraphElement {
 
 	label.classList.add("active");
 
+	return label;
+}
+
+function moveLabel(label: HTMLParagraphElement, position: Point) {
 	const { width, height } = label.getBoundingClientRect();
 
 	const x_offset = position.x - width - 10;
@@ -24,8 +28,6 @@ function showLabel(position: Point): HTMLParagraphElement {
 
 	label.style.top = y_offset.toString() + "px";
 	label.style.left = x_offset.toString() + "px";
-
-	return label;
 }
 
 function hideLabel() {
@@ -39,4 +41,4 @@ function hideLabel() {
 	}
 }
 
-export { showLabel, hideLabel };
+export { hideLabel, moveLabel, showLabel };
