@@ -2,25 +2,25 @@ import { pieUpdate } from "../components/canvas/main";
 import { readableBytes } from "../../../util/units";
 
 const COLORS = {
-	Active: "#444",
-	Buffers: "#273",
-	Cache: "#999",
-	Slab: "#666",
-	Free: "#6d8"
+	Free: "#5bbd78",
+	"Used - Active": "#444",
+	"Used - Buffers": "#303e36",
+	"Used - Cache": "#3d5145"
 };
-
-function formatTotal(total: number): string {
-	const readable = readableBytes(total, 1);
-	return readable;
-}
 
 function memory(data: unknown) {
 	const canvas = document.getElementById("memory-canvas");
+	const total = readableBytes(data.total, 1);
 
 	pieUpdate(canvas, {
 		colors: COLORS,
-		total_callback: formatTotal,
-		values: data
+		total_callback: () => total,
+		values: {
+			Free: data.free,
+			"Used - Buffers": data.buffers,
+			"Used - Cache": data.cache,
+			"Used - Active": data.active,
+		}
 	});
 }
 

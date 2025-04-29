@@ -80,6 +80,10 @@ function isWindows() {
 	return process.platform === "win32";
 }
 
+function isLinux() {
+	return process.platform === "linux";
+}
+
 class OS implements Collector {
 	id = "!os";
 
@@ -92,4 +96,4 @@ class OS implements Collector {
 }
 
 export default OS;
-export { isWindows };
+export { isLinux, isWindows };

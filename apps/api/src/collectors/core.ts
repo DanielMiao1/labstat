@@ -10,24 +10,9 @@
 
 import type Collector from "./base";
 import { execSync } from "child_process";
-import { diskLayout, graphics, mem } from "systeminformation";
+import { diskLayout, graphics } from "systeminformation";
 import { isWindows } from "./os";
 import { networkInterfaces, uptime } from "os";
-
-class Memory implements Collector {
-	id = "memory";
-
-	async getData() {
-		const data = await mem();
-		return {
-			Free: data.free,
-			Active: data.active,
-			Buffers: data.buffers,
-			Cache: data.cached,
-			Slab: data.slab
-		};
-	}
-}
 
 class Disks implements Collector {
 	id = "!disks";
@@ -72,4 +57,4 @@ class Hostname implements Collector {
 	}
 }
 
-export { Disks, Graphics, Hostname, Memory, Network, Uptime };
+export { Disks, Graphics, Hostname, Network, Uptime };

@@ -1,8 +1,9 @@
 import type Collector from "./collectors/base";
+import Memory from "./collectors/memory";
 import OS from "./collectors/os";
 
 import {
-	Disks, Graphics, Hostname, Memory, Network, Uptime
+	Disks, Graphics, Hostname, Network, Uptime
 } from "./collectors/core";
 
 import { LoadAvg } from "./collectors/cpu";
