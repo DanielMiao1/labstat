@@ -3,7 +3,7 @@ import { readableBytes } from "../../../util/units";
 
 const COLORS = {
 	"Free": "#5bbd78",
-	"Used - Active": "#444",
+	"Used - Active": "#333",
 	"Used - Buffers": "#303e36",
 	"Used - Cache": "#3d5145"
 };
@@ -14,7 +14,7 @@ function memory(data: Record<string, number>) {
 
 	pieUpdate(canvas, {
 		colors: COLORS,
-		total_callback: () => total,
+		total,
 		values: {
 			"Free": data.free,
 			"Used - Buffers": data.buffers,

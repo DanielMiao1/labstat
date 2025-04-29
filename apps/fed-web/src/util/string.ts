@@ -50,4 +50,21 @@ function stripFirstLast(text: string, match: string): string {
 	return strip(strip(text, match), match, -1);
 }
 
-export { padNewLine, strip, stripFirstLast, truncate };
+function stripGreedy(text: string, match: string, index = 0): string {
+	if (text.at(index) !== match) return text;
+
+	const adjusted_index = (() => {
+		if (index < 0) {
+			return text.length + index;
+		}
+
+		return index;
+	})();
+
+	const first = text.slice(0, adjusted_index);
+	const last = text.slice(adjusted_index + 1);
+
+	return stripGreedy(first + last, match, index);
+}
+
+export { padNewLine, strip, stripFirstLast, stripGreedy, truncate };

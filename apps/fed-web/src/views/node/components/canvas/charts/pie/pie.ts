@@ -10,19 +10,40 @@ import {
 	type Sector
 } from "../../../../../../util/math/circle";
 
+type value_formatter = (value: number) => string;
+
 interface StyledSector extends Sector {
 	color: string;
 	name: string;
+	value: number;
+}
+
+interface PieInitOptions extends CanvasOptions {
+	value_formatter?: value_formatter;
 }
 
 interface PieUpdateOptions {
 	colors: Record<string, string>;
-	total_callback?: (total: number) => string; // Callback to format total amount
+	total?: string;
 	values: Record<string, number>;
 }
 
-function styleLabel(label: HTMLParagraphElement, sector: StyledSector) {
-	label.innerText = sector.name;
+function styleLabel(
+	label: HTMLParagraphElement,
+	sector: StyledSector,
+	value_formatter: value_formatter
+) {
+	const text = (() => {
+		const name = sector.name;
+
+		if (value_formatter) {
+			return `${name} (${value_formatter(sector.value)})`;
+		}
+
+		return name;
+	})();
+
+	label.innerText = text;
 	label.style.setProperty("--label-fg", sector.color);
 
 	// If the sector color is too dark, make the label background lighter.
@@ -36,7 +57,7 @@ function styleLabel(label: HTMLParagraphElement, sector: StyledSector) {
 	}
 }
 
-function pieChart(options: CanvasOptions) {
+function pieChart(options: PieInitOptions) {
 	void import("./pie.css");
 
 	const canvas = createCanvas({
@@ -90,7 +111,7 @@ function pieChart(options: CanvasOptions) {
 				const absolute_pos = absoluteWithOverflow(mouse_pos);
 
 				const label = showLabel();
-				styleLabel(label, sector);
+				styleLabel(label, sector, options.value_formatter);
 				moveLabel(label, absolute_pos);
 
 				return true;
@@ -141,17 +162,18 @@ function pieUpdate(canvas: HTMLCanvasElement, options: PieUpdateOptions) {
 			start: normalizeAngle(current_angle),
 			end: normalizeAngle(end_angle),
 			color,
-			name: key
+			name: key,
+			value
 		});
 
 		current_angle = end_angle;
 	});
 
-	if (options.total_callback) {
+	if (options.total) {
 		ctx.fillStyle = "white";
 		ctx.shadowBlur = 80;
 
-		ctx.fillText(options.total_callback(sum), midpoint, midpoint);
+		ctx.fillText(options.total, midpoint, midpoint);
 	}
 
 	canvas.dataset.sectors = JSON.stringify(sectors);

@@ -1,5 +1,6 @@
 import createCollectorTitle from "../../components/title";
 import { pieChart } from "../../components/canvas/main";
+import { readableBytes } from "../../../../util/units";
 
 function initMemory() {
 	void import("./memory.css");
@@ -11,7 +12,8 @@ function initMemory() {
 	createCollectorTitle(container, "Memory");
 
 	const canvas = pieChart({
-		size: 280
+		size: 280,
+		value_formatter: readableBytes
 	});
 	container.appendChild(canvas);
 	canvas.id = "memory-canvas";
