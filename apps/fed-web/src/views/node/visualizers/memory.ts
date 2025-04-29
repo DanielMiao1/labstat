@@ -5,7 +5,7 @@ const COLORS = {
 	"Free": "#6d8",
 	"Free Swap": "#273",
 	"Used Swap": "#444"
-}
+};
 
 function formatTotal(total: number): string {
 	const readable = readableBytes(total, 1);

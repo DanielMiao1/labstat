@@ -23,7 +23,7 @@ class Memory implements Collector {
 			"Free": data.free,
 			"Used Swap": data.swapused,
 			"Free Swap": data.swapfree
-		}
+		};
 	}
 }
 

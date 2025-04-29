@@ -1,6 +1,6 @@
 import type { Point } from "../../../../../util/math/geometry";
 
-function showLabel(position: Point): HTMLParagraphElement {
+function showLabel(): HTMLParagraphElement {
 	void import("./label.css");
 
 	const label = (() => {
