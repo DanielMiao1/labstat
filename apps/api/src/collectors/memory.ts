@@ -14,7 +14,14 @@ function parseProcFile(): memory_data {
 	 */
 
 	const file = readFileSync("/proc/meminfo");
-	const data: Record<string, number> = {}
+	const data: Record<string, number> = {
+		Buffers: 0,
+		Cached: 0,
+		MemAvailable: 0,
+		MemTotal: 0,
+		Shmem: 0,
+		SReclaimable: 0
+	};
 
 	file.toString().split("\n").forEach(line => {
 		const separator_index = line.indexOf(":");
@@ -26,19 +33,20 @@ function parseProcFile(): memory_data {
 		data[key] = parseInt(value) * 1024;
 	});
 
-	return {
-		active: data.MemTotal - data.MemAvailable,
-		buffers: data.Buffers,
-		cache: data.Cached + data.SReclaimable - data.Shmem,
-		free: data.MemAvailable,
-		total: data.MemTotal
-	};
+	const free = data.MemAvailable ?? 0;
+	const total = data.MemTotal ?? 0;
+	const active = total - free;
+	const buffers = data.Buffers ?? 0;
+	const adjusted_cached = (data.Cached ?? 0) + (data.Shmem ?? 0);
+	const cache = adjusted_cached + (data.SReclaimable ?? 0);
+
+	return { active, buffers, cache, free, total };
 }
 
 class Memory implements Collector {
 	id = "memory";
 
-	async getData() {
+	getData() {
 		if (isLinux() && existsSync("/proc/meminfo")) {
 			const proc_data = parseProcFile();
 			return proc_data;

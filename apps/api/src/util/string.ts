@@ -48,7 +48,7 @@ function stripGreedy(text: string, match: string, index = 0): string {
 			return text.length + index;
 		}
 
-		return index
+		return index;
 	})();
 
 	const first = text.slice(0, adjusted_index);

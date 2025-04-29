@@ -9,11 +9,12 @@
 		"lib": ["es2020", "dom"],
 		"module": "esnext",
 		"moduleResolution": "node",
+		"noPropertyAccessFromIndexSignature": false,
 		"resolveJsonModule": true,
 		"rootDir": ".",
 		"skipDefaultLibCheck": true,
 		"sourceMap": true,
-		"target": "es2015"
+		"target": "es2015",
 	},
 	"exclude": ["node_modules"],
 	"extends": "@tsconfig/strictest/tsconfig.json"
