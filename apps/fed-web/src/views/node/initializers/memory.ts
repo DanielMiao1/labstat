@@ -1,10 +1,8 @@
-import createCollectorTitle from "../../components/title";
-import { pieChart } from "../../components/canvas/main";
-import { readableBytes } from "../../../../util/units";
+import createCollectorTitle from "../components/title";
+import { pieChart } from "../components/canvas/main";
+import { readableBytes } from "../../../util/units";
 
 function initMemory() {
-	void import("./memory.css");
-
 	const container = document.getElementById("collector-memory");
 	if (!container) return;
 

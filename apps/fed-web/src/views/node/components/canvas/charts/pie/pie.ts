@@ -31,10 +31,10 @@ interface PieUpdateOptions {
 function styleLabel(
 	label: HTMLParagraphElement,
 	sector: StyledSector,
-	value_formatter: value_formatter
+	value_formatter?: value_formatter
 ) {
 	const text = (() => {
-		const name = sector.name;
+		const { name } = sector;
 
 		if (value_formatter) {
 			return `${name} (${value_formatter(sector.value)})`;

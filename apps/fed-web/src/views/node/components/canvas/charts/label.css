@@ -4,7 +4,8 @@
 	border-radius: 6px;
 	color: white;
 	display: none;
-	padding: 0.55em;
+	font-size: 0.85em;
+	padding: 0.65em;
 	position: absolute;
 
 	&.active {

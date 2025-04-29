@@ -6,7 +6,7 @@
 	background-color: var(--label-fg);
 	content: "";
 	display: inline-block;
-	height: 11px;
+	height: 1.4ex;
 	margin: 0 5px 0 2px;
-	width: 11px;
+	width: 1.4ex;
 }

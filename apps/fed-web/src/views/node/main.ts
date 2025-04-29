@@ -1,6 +1,6 @@
 import getHash from "../../util/hash";
 import initLoadavg from "./initializers/loadavg/main";
-import initMemory from "./initializers/memory/main";
+import initMemory from "./initializers/memory";
 import initOS from "./initializers/os";
 import showData from "./visualizer";
 
