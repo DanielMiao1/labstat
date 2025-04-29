@@ -20,11 +20,11 @@ class Memory implements Collector {
 	async getData() {
 		const data = await mem();
 		return {
-			"Free": data.free,
-			"Active": data.active,
-			"Buffers": data.buffers,
-			"Cache": data.cached,
-			"Slab": data.slab
+			Free: data.free,
+			Active: data.active,
+			Buffers: data.buffers,
+			Cache: data.cached,
+			Slab: data.slab
 		};
 	}
 }
