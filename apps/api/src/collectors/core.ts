@@ -21,8 +21,10 @@ class Memory implements Collector {
 		const data = await mem();
 		return {
 			"Free": data.free,
-			"Used Swap": data.swapused,
-			"Free Swap": data.swapfree
+			"Active": data.active,
+			"Buffers": data.buffers,
+			"Cache": data.cached,
+			"Slab": data.slab
 		};
 	}
 }

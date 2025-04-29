@@ -2,9 +2,11 @@ import { pieUpdate } from "../components/canvas/main";
 import { readableBytes } from "../../../util/units";
 
 const COLORS = {
-	"Free": "#6d8",
-	"Free Swap": "#273",
-	"Used Swap": "#444"
+	"Active": "#444",
+	"Buffers": "#273",
+	"Cache": "#999",
+	"Slab": "#666",
+	"Free": "#6d8"
 };
 
 function formatTotal(total: number): string {
