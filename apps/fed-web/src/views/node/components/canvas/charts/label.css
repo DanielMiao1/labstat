@@ -1,7 +1,7 @@
 .chart-label {
-	backdrop-filter: blur(16px);
+	backdrop-filter: blur(13px);
 	background-color: #0006;
-	border-radius: 6px;
+	border-radius: 7px;
 	color: white;
 	display: none;
 	font-size: 0.85em;

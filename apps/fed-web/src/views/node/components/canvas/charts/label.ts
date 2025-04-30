@@ -23,8 +23,16 @@ function showLabel(): HTMLParagraphElement {
 function moveLabel(label: HTMLParagraphElement, position: Point) {
 	const { width, height } = label.getBoundingClientRect();
 
-	const x_offset = position.x - width - 10;
-	const y_offset = position.y - height - 10;
+	let x_offset = position.x - width - 10;
+	let y_offset = position.y - height - 10;
+
+	if (x_offset - 10 < window.scrollX) {
+		x_offset = position.x;
+	}
+
+	if (y_offset - 10 < window.scrollY) {
+		y_offset = position.y + 30;
+	}
 
 	label.style.top = y_offset.toString() + "px";
 	label.style.left = x_offset.toString() + "px";

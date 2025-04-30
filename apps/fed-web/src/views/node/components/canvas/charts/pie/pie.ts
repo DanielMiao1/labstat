@@ -1,4 +1,4 @@
-import { absoluteWithOverflow } from "../../../../../../util/dom";
+import { absoluteWithOverflow } from "../../../../../../util/position";
 import createCanvas, { type CanvasOptions } from "../../main";
 import Color from "../../../../../../util/color";
 import { hideLabel, moveLabel, showLabel } from "../label";
