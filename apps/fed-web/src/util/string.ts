@@ -67,4 +67,15 @@ function stripGreedy(text: string, match: string, index = 0): string {
 	return stripGreedy(first + last, match, index);
 }
 
-export { padNewLine, strip, stripFirstLast, stripGreedy, truncate };
+function stripTrailingZeros(text: string): string {
+	return strip(stripGreedy(text, "0", -1), ".", -1);
+}
+
+export {
+	padNewLine,
+	strip,
+	stripFirstLast,
+	stripGreedy,
+	stripTrailingZeros,
+	truncate
+};
