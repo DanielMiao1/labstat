@@ -14,7 +14,7 @@ export default tseslint.config(
 		quotes: "double",
 		semi: true
 	}),
-	globalIgnores(["dist"]),
+	globalIgnores(["dist", ".nx"]),
 	{
 		languageOptions: {
 			parserOptions: {
