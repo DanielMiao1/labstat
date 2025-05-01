@@ -61,6 +61,10 @@ function stripGreedyFirstLast(text: string, match: string): string {
 	return stripGreedy(stripGreedy(text, match), match, -1);
 }
 
+function stripTrailingZeros(text: string): string {
+	return strip(stripGreedy(text, "0", -1), ".", -1);
+}
+
 export {
 	strip,
 	stripAllQuotes,
@@ -68,5 +72,6 @@ export {
 	stripFirstLast,
 	stripGreedy,
 	stripGreedyFirstLast,
-	stripSingleQuotes
+	stripSingleQuotes,
+	stripTrailingZeros
 };
