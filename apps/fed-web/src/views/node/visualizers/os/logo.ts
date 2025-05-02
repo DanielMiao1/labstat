@@ -11,30 +11,17 @@ import { padNewLine } from "../../../../util/string";
 const OS_ALIAS = json.aliases as Record<string, string>;
 
 function removeBashVariables(text: string): string {
-	let clean_text = "";
-	let index = 0;
-	let loop = 0;
+	const next_var = text.indexOf("$");
+	if (next_var === -1) return text;
 
-	while (index < text.length) {
-		if (loop++ >= 200) return text;
+	const first = text.slice(0, next_var);
 
-		const next_var = text.indexOf("$", index);
-		if (next_var === -1) {
-			clean_text += text.slice(index);
-			break;
-		}
-
-		clean_text += text.slice(index, next_var);
-
-		if (text[next_var + 1] === "{") {
-			const var_end = text.indexOf("}", next_var);
-			index = var_end + 1;
-		} else {
-			index = next_var + 2;
-		}
+	if (text.at(next_var + 1) === "{") {
+		const var_end = text.indexOf("}", next_var);
+		return first + removeBashVariables(text.slice(var_end + 1));
 	}
 
-	return clean_text;
+	return first + removeBashVariables(text.slice(next_var + 2));
 }
 
 async function getLogo(os: string) {

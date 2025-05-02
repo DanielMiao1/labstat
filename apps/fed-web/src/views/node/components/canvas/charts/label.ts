@@ -1,3 +1,4 @@
+import { removeChildren } from "../../../../../util/dom";
 import type { Point } from "../../../../../util/math/geometry";
 
 function showLabel(): HTMLParagraphElement {
@@ -43,10 +44,7 @@ function hideLabel() {
 	if (!label) return;
 
 	label.classList.remove("active");
-
-	while (label.children.length) {
-		label.children[0]?.remove();
-	}
+	removeChildren(label);
 }
 
 export { hideLabel, moveLabel, showLabel };
