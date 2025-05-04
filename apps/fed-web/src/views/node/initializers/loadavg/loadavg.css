@@ -6,4 +6,5 @@
 
 .loadavg-bottom {
 	gap: 4em;
+	justify-content: center;
 }

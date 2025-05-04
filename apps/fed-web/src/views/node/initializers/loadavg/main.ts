@@ -37,7 +37,7 @@ function initLoadavg() {
 	const data_5m = document.createElement("p");
 	left_bot.appendChild(data_5m);
 	data_5m.id = "loadavg_5m";
-	data_5m.classList.add("p-large", "p-bold");
+	data_5m.classList.add("p-large", "p-bold", "p-center");
 
 	const label_5m = document.createElement("p");
 	left_bot.appendChild(label_5m);
@@ -51,7 +51,7 @@ function initLoadavg() {
 	const data_15m = document.createElement("p");
 	right_bot.appendChild(data_15m);
 	data_15m.id = "loadavg_15m";
-	data_15m.classList.add("p-large", "p-bold");
+	data_15m.classList.add("p-large", "p-bold", "p-center");
 
 	const label_15m = document.createElement("p");
 	right_bot.appendChild(label_15m);
