@@ -49,7 +49,7 @@ async function initializeSocket(node: string) {
 		showData(id, data);
 	});
 
-	registerDeinit(() => socket.close());
+	registerDeinit(() => { socket.close() });
 
 	return new Promise(resolve => {
 		socket.addEventListener("open", resolve);
@@ -91,7 +91,7 @@ async function nodeView(content: HTMLElement) {
 	});
 
 	const interval = setInterval(refreshData, 1000);
-	registerDeinit(() => clearInterval(interval));
+	registerDeinit(() => { clearInterval(interval) });
 }
 
 export default nodeView;

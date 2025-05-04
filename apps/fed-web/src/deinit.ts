@@ -6,7 +6,7 @@ function registerDeinit(func: deinit_func) {
 }
 
 function deinitAll() {
-	deinit.forEach(func => func());
+	deinit.forEach(func => { func() });
 }
 
 export default registerDeinit;
