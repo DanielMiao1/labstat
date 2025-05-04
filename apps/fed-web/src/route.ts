@@ -1,10 +1,13 @@
+import { deinitAll } from "./deinit";
+import getHash from "./util/hash";
 import mainView from "./views/main";
 import nodeView from "./views/node/main";
-import getHash from "./util/hash";
 
 import "./main.css";
 
 function update() {
+	deinitAll();
+	
 	if (document.getElementsByTagName("main").length) {
 		document.getElementsByTagName("main").item(0)?.remove();
 	}
@@ -22,7 +25,4 @@ function update() {
 }
 
 update();
-
-window.addEventListener("hashchange", () => {
-	update();
-});
+window.addEventListener("hashchange", update);

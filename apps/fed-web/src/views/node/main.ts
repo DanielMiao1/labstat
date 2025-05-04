@@ -2,6 +2,7 @@ import getHash from "../../util/hash";
 import initLoadavg from "./initializers/loadavg/main";
 import initMemory from "./initializers/memory";
 import initOS from "./initializers/os";
+import registerDeinit from "../../deinit";
 import showData from "./visualizer";
 
 import "./node.css";
@@ -48,6 +49,8 @@ async function initializeSocket(node: string) {
 		showData(id, data);
 	});
 
+	registerDeinit(() => socket.close());
+
 	return new Promise(resolve => {
 		socket.addEventListener("open", resolve);
 	});
@@ -87,7 +90,8 @@ async function nodeView(content: HTMLElement) {
 		}
 	});
 
-	setInterval(refreshData, 1000);
+	const interval = setInterval(refreshData, 1000);
+	registerDeinit(() => clearInterval(interval));
 }
 
 export default nodeView;
