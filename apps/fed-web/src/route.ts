@@ -7,7 +7,7 @@ import "./main.css";
 
 function update() {
 	deinitAll();
-	
+
 	if (document.getElementsByTagName("main").length) {
 		document.getElementsByTagName("main").item(0)?.remove();
 	}
