@@ -1,4 +1,5 @@
 import { resolve } from "path";
+import { rspack } from "@rspack/core";
 
 export default {
 	entry: {
@@ -27,6 +28,11 @@ export default {
 	output: {
 		path: resolve(process.cwd(), "dist/api")
 	},
+	plugins: [
+		new rspack.IgnorePlugin({
+			resourceRegExp: /osx-temperature-sensor/
+		})
+	],
 	resolve: {
 		extensions: [".js", ".ts", ".json"]
 	},
