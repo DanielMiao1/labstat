@@ -87,7 +87,7 @@ function pieChart(options: PieInitOptions) {
 				return JSON.parse(canvas.dataset.sectors) as StyledSector[];
 			} catch {
 				console.warn(
-					"[canvas/pieChart] failed to parse JSON sectors data. Hover effects"
+					"[canvas/pieChart] failed to parse JSON sectors data. Hover effects "
 					+ "may not work"
 				);
 			}

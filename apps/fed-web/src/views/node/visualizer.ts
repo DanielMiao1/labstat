@@ -1,3 +1,4 @@
+import cpufreq from "./visualizers/cpufreq";
 import disks from "./visualizers/disks";
 import graphics from "./visualizers/graphics";
 import hostname from "./visualizers/hostname";
@@ -9,6 +10,7 @@ import os from "./visualizers/os/main";
 type handler = (data: unknown) => void;
 
 const handlers: Record<string, handler | null> = {
+	cpufreq,
 	"!disks": disks,
 	"!graphics": graphics,
 	"!hostname": hostname,

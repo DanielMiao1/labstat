@@ -1,15 +1,14 @@
-import type Collector from "./collectors/base";
+import { CPUFreq, LoadAvg } from "./collectors/cpu";
 import Memory from "./collectors/memory";
 import OS from "./collectors/os";
+import type Collector from "./collectors/base";
 
 import {
 	Disks, Graphics, Hostname, Network, Uptime
 } from "./collectors/core";
 
-import { LoadAvg } from "./collectors/cpu";
-
 const all_collectors: Collector[] = [
-	Disks, Graphics, Hostname, LoadAvg, Memory, Network, OS, Uptime
+	CPUFreq, Disks, Graphics, Hostname, LoadAvg, Memory, Network, OS, Uptime
 ];
 
 const active_collectors: Record<string, Collector | null> = {};
