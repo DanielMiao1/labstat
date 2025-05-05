@@ -1,16 +1,7 @@
-import { absoluteWithOverflow } from "../../../../../../util/position";
+import attachListeners, { type value_formatter } from "./label";
 import createCanvas, { type CanvasOptions } from "../../main";
-import Color from "../../../../../../util/color";
-import { hideLabel, moveLabel, showLabel } from "../label";
 import { normalizeAngle } from "../../../../../../util/math/geometry";
-
-import {
-	pointInSector,
-	type Circle,
-	type Sector
-} from "../../../../../../util/math/circle";
-
-type value_formatter = (value: number) => string;
+import type { Sector } from "../../../../../../util/math/circle";
 
 interface StyledSector extends Sector {
 	color: string;
@@ -28,35 +19,6 @@ interface PieUpdateOptions {
 	values: Record<string, number>;
 }
 
-function styleLabel(
-	label: HTMLParagraphElement,
-	sector: StyledSector,
-	value_formatter?: value_formatter
-) {
-	const text = (() => {
-		const { name } = sector;
-
-		if (value_formatter) {
-			return `${name} (${value_formatter(sector.value)})`;
-		}
-
-		return name;
-	})();
-
-	label.innerText = text;
-	label.style.setProperty("--label-fg", sector.color);
-
-	// If the sector color is too dark, make the label background lighter.
-	const sector_color = new Color(sector.color);
-	const lightness = sector_color.lumaLightness();
-
-	if (lightness < 127) {
-		label.classList.add("light");
-	} else {
-		label.classList.remove("light");
-	}
-}
-
 function pieChart(options: PieInitOptions) {
 	void import("./pie.css");
 
@@ -71,53 +33,7 @@ function pieChart(options: PieInitOptions) {
 	ctx.textAlign = "center";
 	ctx.textBaseline = "middle";
 
-	const midpoint = Math.floor(options.size / 2);
-
-	canvas.addEventListener("mouseleave", () => {
-		hideLabel();
-	});
-
-	canvas.addEventListener("mousemove", event => {
-		const canvas_rect = canvas.getBoundingClientRect();
-		const x = event.clientX - canvas_rect.left;
-		const y = event.clientY - canvas_rect.top;
-
-		const sectors = (() => {
-			try {
-				return JSON.parse(canvas.dataset.sectors) as StyledSector[];
-			} catch {
-				console.warn(
-					"[charts/pie] failed to parse JSON sectors data. Hover effects "
-					+ "may not work"
-				);
-			}
-		})();
-
-		if (!sectors) return;
-
-		const circle: Circle = {
-			origin: {
-				x: midpoint,
-				y: midpoint
-			},
-			radius: midpoint - 10
-		};
-
-		sectors.some((sector: StyledSector) => {
-			const included = pointInSector({ x, y }, circle, sector);
-
-			if (included) {
-				const mouse_pos = { x: event.x, y: event.y };
-				const absolute_pos = absoluteWithOverflow(mouse_pos);
-
-				const label = showLabel();
-				styleLabel(label, sector, options.value_formatter);
-				moveLabel(label, absolute_pos);
-
-				return true;
-			}
-		}) || hideLabel(); // Hide label if no setor is found
-	});
+	attachListeners(canvas, options.value_formatter);
 
 	return canvas;
 }
@@ -180,4 +96,4 @@ function pieChartUpdate(canvas: HTMLCanvasElement, options: PieUpdateOptions) {
 }
 
 export { pieChart, pieChartUpdate };
-export type { StyledSector };
+export { type StyledSector };
