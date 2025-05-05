@@ -87,7 +87,7 @@ function pieChart(options: PieInitOptions) {
 				return JSON.parse(canvas.dataset.sectors) as StyledSector[];
 			} catch {
 				console.warn(
-					"[canvas/pieChart] failed to parse JSON sectors data. Hover effects "
+					"[charts/pie] failed to parse JSON sectors data. Hover effects "
 					+ "may not work"
 				);
 			}
@@ -122,7 +122,7 @@ function pieChart(options: PieInitOptions) {
 	return canvas;
 }
 
-function pieUpdate(canvas: HTMLCanvasElement, options: PieUpdateOptions) {
+function pieChartUpdate(canvas: HTMLCanvasElement, options: PieUpdateOptions) {
 	const ctx = canvas.getContext("2d");
 	if (!ctx) return;
 
@@ -179,5 +179,5 @@ function pieUpdate(canvas: HTMLCanvasElement, options: PieUpdateOptions) {
 	canvas.dataset.sectors = JSON.stringify(sectors);
 }
 
-export { pieChart, pieUpdate };
+export { pieChart, pieChartUpdate };
 export type { StyledSector };

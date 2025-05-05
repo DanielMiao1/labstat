@@ -1,4 +1,5 @@
 import getHash from "../../util/hash";
+import initCpufreq from "./initializers/cpufreq/main";
 import initLoadavg from "./initializers/loadavg/main";
 import initMemory from "./initializers/memory";
 import initOS from "./initializers/os";
@@ -15,7 +16,7 @@ let socket: WebSocket;
 const collectors: string[] = [];
 
 const INIT_COLLECTORS = [
-	"!os", "loadavg", "memory", "!disks", "!net", "!graphics"
+	"!os", "loadavg", "cpufreq", "memory", "!disks", "!net", "!graphics"
 ];
 
 function createContainer(id: string, parent: HTMLElement) {
@@ -82,9 +83,10 @@ async function nodeView(content: HTMLElement) {
 		});
 	});
 
-	initLoadavg();
-	initMemory();
 	initOS();
+	initLoadavg();
+	initCpufreq();
+	initMemory();
 
 	all_collectors.forEach(id => {
 		if (!id.startsWith("!")) {

@@ -116,7 +116,7 @@ class CPUFreq implements Collector {
 		if (!existsSync(path)) return 0;
 
 		const data = readFileSync(path).toString();
-		return parseInt(data);
+		return parseInt(data) * 1000;
 	}
 }
 

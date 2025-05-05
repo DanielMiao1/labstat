@@ -1,4 +1,4 @@
-import { pieUpdate } from "../components/canvas/main";
+import { pieChartUpdate } from "../components/canvas/main";
 import { readableBytes } from "../../../util/units";
 
 const COLORS = {
@@ -12,7 +12,7 @@ function memory(data: Record<string, number>) {
 	const canvas = document.getElementById("memory-canvas");
 	const total = readableBytes(data.total, 1);
 
-	pieUpdate(canvas, {
+	pieChartUpdate(canvas, {
 		colors: COLORS,
 		total,
 		values: {
