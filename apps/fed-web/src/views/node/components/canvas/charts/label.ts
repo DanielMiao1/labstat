@@ -44,6 +44,8 @@ function hideLabel() {
 	if (!label) return;
 
 	label.classList.remove("active");
+	delete label.dataset.chart;
+	delete label.dataset.modifiers;
 	removeChildren(label);
 }
 

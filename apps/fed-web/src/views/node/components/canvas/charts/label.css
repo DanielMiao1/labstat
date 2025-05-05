@@ -12,7 +12,7 @@
 		display: block;
 	}
 
-	&.light {
+	&[data-modifiers~="light"] {
 		background-color: #fff8;
 		color: black;
 	}

@@ -21,9 +21,9 @@ function drawPoints(
 	min: number,
 	max: number,
 	values: number[]
-) {
+): number[] {
 	const first_value = values.at(0);
-	if (!first_value) return;
+	if (!first_value) return [];
 
 	const pos = pointPos(first_value, min, max, ctx);
 
@@ -32,7 +32,7 @@ function drawPoints(
 	ctx.lineTo(x + 10, pos);
 	ctx.stroke();
 
-	drawPoints(ctx, x + 30, min, max, values.slice(1));
+	return [x, ...drawPoints(ctx, x + 30, min, max, values.slice(1))];
 }
 
 export default drawPoints;

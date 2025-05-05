@@ -1,8 +1,4 @@
-.contains-piechart-label {
-	position: relative;
-}
-
-.chart-label::before {
+.chart-label[data-chart="pie"]::before {
 	background-color: var(--label-fg);
 	content: "";
 	display: inline-block;

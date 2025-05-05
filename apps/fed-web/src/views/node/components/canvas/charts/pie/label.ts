@@ -23,15 +23,16 @@ function styleLabel(
 
 	label.innerText = text;
 	label.style.setProperty("--label-fg", sector.color);
+	label.dataset.chart = "pie";
 
 	// If the sector color is too dark, make the label background lighter.
 	const sector_color = new Color(sector.color);
 	const lightness = sector_color.lumaLightness();
 
 	if (lightness < 127) {
-		label.classList.add("light");
+		label.dataset.modifiers = "light";
 	} else {
-		label.classList.remove("light");
+		delete label.dataset.modifiers;
 	}
 }
 
@@ -55,7 +56,7 @@ function attachListeners(
 				return JSON.parse(canvas.dataset.sectors) as StyledSector[];
 			} catch {
 				console.warn(
-					"[charts/pie] failed to parse JSON sectors data. Hover effects "
+					"[charts/pie] failed to parse JSON sectors data. Chart hover effects "
 					+ "may not work"
 				);
 			}

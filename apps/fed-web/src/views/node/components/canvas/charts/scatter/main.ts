@@ -1,3 +1,4 @@
+import attachListeners from "./label";
 import createCanvas, { type CanvasOptions } from "../../main";
 import drawPoints from "./point";
 import { drawYAxis } from "./axes";
@@ -10,6 +11,12 @@ interface ScatterUpdateOptions {
 	y_increment: number;
 }
 
+interface PointData {
+	index: number;
+	value: number;
+	x: number;
+}
+
 function initCanvas(ctx: CanvasRenderingContext2D) {
 	ctx.fillStyle = "white";
 	ctx.font = "20px sans-serif";
@@ -20,7 +27,10 @@ function initCanvas(ctx: CanvasRenderingContext2D) {
 }
 
 function scatterPlot(options: CanvasOptions): HTMLCanvasElement {
-	return createCanvas(options);
+	const canvas = createCanvas(options);
+	attachListeners(canvas);
+
+	return canvas;
 }
 
 function scatterPlotUpdate(
@@ -58,8 +68,20 @@ function scatterPlotUpdate(
 
 	drawYAxis(ctx, min, max, options);
 
-	drawPoints(ctx, 150, min, max, options.values);
+	const columns = drawPoints(ctx, 150, min, max, options.values);
+	const points: PointData[] = [];
+
+	columns.forEach((column, index) => {
+		const value = options.values.at(index);
+		points.push({
+			index,
+			value: options.value_formatter ? options.value_formatter(value) : value,
+			x: column
+		});
+	});
+
+	canvas.dataset.points = JSON.stringify(points);
 }
 
 export { scatterPlot, scatterPlotUpdate };
-export type { ScatterUpdateOptions };
+export type { PointData, ScatterUpdateOptions };
