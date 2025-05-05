@@ -2,7 +2,7 @@ import { pieChartUpdate } from "../components/canvas/main";
 import { readableBytes } from "../../../util/units";
 
 const COLORS = {
-	"Free": "#5bbd78",
+	"Free": "#5aba80",
 	"Used - Active": "#333",
 	"Used - Buffers": "#303e36",
 	"Used - Cache": "#3d5145"

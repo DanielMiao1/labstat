@@ -6,6 +6,7 @@ import { drawYAxis } from "./axes";
 type value_formatter = (value: number) => string;
 
 interface ScatterUpdateOptions {
+	colors?: [string, string];
 	values: number[];
 	value_formatter?: value_formatter;
 	y_increment: number;
@@ -68,7 +69,10 @@ function scatterPlotUpdate(
 
 	drawYAxis(ctx, min, max, options);
 
-	const columns = drawPoints(ctx, 150, min, max, options.values);
+	const columns = drawPoints(
+		ctx, 150, min, max, options.values, options.colors
+	);
+
 	const points: PointData[] = [];
 
 	columns.forEach((column, index) => {

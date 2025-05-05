@@ -31,7 +31,6 @@ function attachListeners(canvas: HTMLCanvasElement) {
 		const x = 2 * (mouse_pos.x - canvas_rect.left);
 
 		points.some(point => {
-			console.log(x, point.x);
 			if (x > point.x && x < point.x + 30) {
 				const absolute_pos = absoluteWithOverflow(mouse_pos);
 
