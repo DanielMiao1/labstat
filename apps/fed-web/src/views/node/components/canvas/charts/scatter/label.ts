@@ -28,12 +28,10 @@ function pointLabel(canvas: HTMLCanvasElement, pos: Point) {
 
 	if (!points) return;
 
-	const canvas_rect = canvas.getBoundingClientRect();
-	const mouse_x = 2 * (pos.x - canvas_rect.left);
-	// [todo] use relativeInContext()
+	const { x } = relativeInContext(pos, canvas);
 
 	points.some(point => {
-		if (mouse_x > point.x && mouse_x < point.x + 30) {
+		if (x * 2 > point.x && x * 2 < point.x + 30) {
 			const absolute_pos = absoluteWithOverflow(pos);
 
 			styleLabel(
