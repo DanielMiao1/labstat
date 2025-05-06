@@ -26,7 +26,7 @@ function drawStats(
 	const y = 19;
 
 	ctx.textAlign = "left";
-	ctx.textBaseline = "center";
+	ctx.textBaseline = "middle";
 	ctx.font = "bold 24px sans-serif";
 
 	const min_text = min.toString();
