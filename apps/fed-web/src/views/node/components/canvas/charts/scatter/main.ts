@@ -1,6 +1,7 @@
 import attachListeners from "./label";
 import createCanvas, { type CanvasOptions } from "../../main";
 import drawPoints from "./point";
+import drawStats from "./stats";
 import { drawYAxis } from "./axes";
 
 type value_formatter = (value: number) => string;
@@ -68,6 +69,7 @@ function scatterPlotUpdate(
 	}
 
 	drawYAxis(ctx, min, max, options);
+	drawStats(ctx, options.values, options.value_formatter);
 
 	const columns = drawPoints(
 		ctx, 150, min, max, options.values, options.colors
@@ -88,4 +90,4 @@ function scatterPlotUpdate(
 }
 
 export { scatterPlot, scatterPlotUpdate };
-export type { PointData, ScatterUpdateOptions };
+export type { PointData, ScatterUpdateOptions, value_formatter };
