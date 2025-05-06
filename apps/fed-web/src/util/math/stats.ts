@@ -16,7 +16,7 @@ function percentInRange(value: number, min: number, max: number): number {
 	return clamped_value / range;
 }
 
-function mean(values: number[]): number {
+function mean(...values: number[]): number {
 	return sum(values) / values.length;
 }
 

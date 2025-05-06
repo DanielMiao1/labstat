@@ -21,7 +21,7 @@ function drawYAxis(
 	const { height } = ctx.canvas;
 
 	ctx.beginPath();
-	ctx.moveTo(130, 20);
+	ctx.moveTo(130, 80);
 	ctx.lineTo(130, height - 20);
 	ctx.stroke();
 

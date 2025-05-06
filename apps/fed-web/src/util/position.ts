@@ -15,4 +15,17 @@ function absoluteFromContext(point: Point, context: HTMLElement): Point {
 	return pointSum(point, context_pos);
 }
 
-export { absoluteFromContext, absolutePosition, absoluteWithOverflow };
+function relativeInContext(point: Point, context: HTMLElement): Point {
+	const { left, top } = context.getBoundingClientRect();
+	return {
+		x: point.x - left,
+		y: point.y - top
+	};
+}
+
+export {
+	absoluteFromContext,
+	absolutePosition,
+	absoluteWithOverflow,
+	relativeInContext
+};

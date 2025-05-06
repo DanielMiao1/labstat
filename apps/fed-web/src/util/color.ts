@@ -159,7 +159,7 @@ class Color {
 		const alpha1 = this.alpha();
 		const alpha2 = 1;
 
-		const alpha = mean([alpha1, alpha2]);
+		const alpha = mean(alpha1, alpha2);
 
 		return new Color([...mixed, alpha]);
 	}

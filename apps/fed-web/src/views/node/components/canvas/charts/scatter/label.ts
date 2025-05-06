@@ -1,9 +1,66 @@
-import { absoluteWithOverflow } from "../../../../../../util/position";
 import { hideLabel, moveLabel, showLabel } from "../label";
+import type { Stats } from "./stats";
+import type { Point } from "../../../../../../util/math/geometry";
 import type { PointData } from "./main";
 
-function styleLabel(label: HTMLParagraphElement, point: PointData) {
-	label.innerText = `Core ${point.index.toString()}: ${point.value.toString()}`;
+import {
+	absoluteWithOverflow,
+	relativeInContext
+} from "../../../../../../util/position";
+
+function styleLabel(pos: Point, text: string) {
+	const label = showLabel();
+	moveLabel(label, pos);
+	label.innerText = text;
+}
+
+function pointLabel(canvas: HTMLCanvasElement, pos: Point) {
+	const points = (() => {
+		try {
+			return JSON.parse(canvas.dataset.points) as PointData[];
+		} catch {
+			console.warn(
+				"[charts/scatter] failed to parse JSON points data. Chart hover"
+				+ "effects may not work"
+			);
+		}
+	})();
+
+	if (!points) return;
+
+	const canvas_rect = canvas.getBoundingClientRect();
+	const mouse_x = 2 * (pos.x - canvas_rect.left);
+	// [todo] use relativeInContext()
+
+	points.some(point => {
+		if (mouse_x > point.x && mouse_x < point.x + 30) {
+			const absolute_pos = absoluteWithOverflow(pos);
+
+			styleLabel(
+				absolute_pos,
+				`Core ${point.index.toString()}: ${point.value.toString()}`
+			);
+
+			return true;
+		}
+	}) || hideLabel();
+}
+
+function statLabel(canvas: HTMLCanvasElement, pos: Point) {
+	const data = canvas.dataset.stats;
+	if (!data) return;
+
+	const { x } = relativeInContext(pos, canvas);
+
+	const stats = JSON.parse(data) as Stats[];
+	stats.some(stat => {
+		const [start, end] = stat.range;
+		if (x * 2 >= start && x * 2 <= end) {
+			const absolute_pos = absoluteWithOverflow(pos);
+			styleLabel(absolute_pos, `${stat.name}: ${stat.value}`);
+			return true;
+		}
+	});
 }
 
 function attachListeners(canvas: HTMLCanvasElement) {
@@ -12,35 +69,13 @@ function attachListeners(canvas: HTMLCanvasElement) {
 	});
 
 	canvas.addEventListener("mousemove", event => {
-		const points = (() => {
-			try {
-				return JSON.parse(canvas.dataset.points) as PointData[];
-			} catch {
-				console.warn(
-					"[charts/scatter] failed to parse JSON points data. Chart hover"
-					+ "effects may not work"
-				);
-			}
-		})();
+		const { y } = relativeInContext(event, canvas);
 
-		if (!points) return;
-
-		const canvas_rect = canvas.getBoundingClientRect();
-		const mouse_pos = { x: event.x, y: event.y };
-
-		const x = 2 * (mouse_pos.x - canvas_rect.left);
-
-		points.some(point => {
-			if (x > point.x && x < point.x + 30) {
-				const absolute_pos = absoluteWithOverflow(mouse_pos);
-
-				const label = showLabel();
-				styleLabel(label, point);
-				moveLabel(label, absolute_pos);
-
-				return true;
-			}
-		}) || hideLabel();
+		if (y <= 40) {
+			statLabel(canvas, event);
+		} else {
+			pointLabel(canvas, event);
+		}
 	});
 }
 

@@ -8,7 +8,7 @@ function pointPos(
 	ctx: CanvasRenderingContext2D
 ): number {
 	const { height } = ctx.canvas;
-	const pixel_range = height - 40;
+	const pixel_range = height - 100;
 
 	const portion = percentInRange(value, min, max);
 	const pixel_portion = portion * pixel_range;
